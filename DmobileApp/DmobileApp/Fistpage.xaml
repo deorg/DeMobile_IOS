@@ -2,6 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DmobileApp.Fistpage">
-
-    <Button HorizontalOptions="Center" VerticalOptions="Center" Text="Click Me" Clicked="Button_Clicked"></Button>
+    <StackLayout Margin="10,35,10,10">
+        
+        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Welcome" FontAttributes="Bold"/>
+        <Entry x:Name="txtName" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="500"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnGreet" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" 
+                    Text="Hello" Clicked="btnGreet_Clicked"/>
+            <Button x:Name="btnClear" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" 
+                    Text="Delete" Clicked="btnClear_Clicked"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>

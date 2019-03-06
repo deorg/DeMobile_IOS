@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DmobileApp.ListSms">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <ListView x:Name="ListView1" RowHeight="60" ItemSelected="message_selected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding sms_time}" FontAttributes="Bold" FontSize="16"/>
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding sms_note}" FontSize="16"/>
+                            </Grid>
+                            <!--<StackLayout Orientation="Vertical" Padding="8,0,8,0">
+                                <Label Text="{Binding SMS_TIME}" TextColor="#000" FontSize="14" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding SMS_NOTE}" TextColor="#000" LineBreakMode="TailTruncation" />
+                            </StackLayout>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

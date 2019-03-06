@@ -17,9 +17,15 @@ namespace DmobileApp
 			InitializeComponent ();
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void btnGreet_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Title", "Hello world", "OK");
+            DisplayAlert("Greeting", $"Hello Mr.{txtName.Text}", "OK");
+            Navigation.PushAsync(new Mainpage());
+
+        }
+        private void btnClear_Clicked(object sender, EventArgs e)
+        {
+            txtName.Text = "";
         }
     }
 }

@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-//[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DmobileApp
 {
     public partial class App : Application
@@ -11,7 +11,7 @@ namespace DmobileApp
         {
             InitializeComponent();
 
-            MainPage = new Fistpage();
+            MainPage = new NavigationPage(new Fistpage());
         }
 
         protected override void OnStart()

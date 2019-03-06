@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DmobileApp.Profile">
+    <Grid Margin="20,35,20,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label FontAttributes="Bold" FontSize="16" Grid.ColumnSpan="2" Grid.Row="0" HorizontalOptions="Center" Text="Profile"/>
+        
+        <Label FontAttributes="Bold" FontSize="14" Grid.Column="0" Grid.Row="1" Text="รหัสลูกค้า:"/>
+        <Label FontSize="14" Grid.Column="1" Grid.Row="1" Text="{Binding CUST_NO}"/>
+
+        <Label FontAttributes="Bold" FontSize="14" Grid.Column="0" Grid.Row="2" Text="ชื่อลูกค้า:"/>
+        <Label FontSize="14" Grid.Column="1" Grid.Row="2" Text="{Binding CUST_NAME}"/>
+
+        <Label FontAttributes="Bold" FontSize="14" Grid.Column="0" Grid.Row="3" Text="รหัสประจำตัวประชาชน:"/>
+        <Label FontSize="14" Grid.Column="1" Grid.Row="3" Text="{Binding CITIZEN_NO}"/>
+
+        <Label FontAttributes="Bold" FontSize="14" Grid.Column="0" Grid.Row="4" Text="เบอร์ติดต่อ:"/>
+        <Label FontSize="14" Grid.Column="1" Grid.Row="4" Text="{Binding TEL}"/>
+
+        <Label FontAttributes="Bold" FontSize="14" Grid.Column="0" Grid.Row="5" Text="เข้าถึงบริการ:"/>
+        <Label FontSize="14" Grid.Column="1" Grid.Row="5" Text="{Binding PERMIT}"/>
+    </Grid>
+</ContentPage>
