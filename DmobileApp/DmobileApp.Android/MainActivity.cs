@@ -13,6 +13,7 @@ using Android;
 using Android.Support.V4.Content;
 using Android.Support.Design.Widget;
 using Java.Lang;
+using Java.Util;
 
 namespace DmobileApp.Droid
 {
@@ -33,10 +34,14 @@ namespace DmobileApp.Droid
             {
                 var context = Application.Context;
                 deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
-
+                
                 //string serialSim = "8966051405494794566";
                 var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
                 serialSim = tMgr.SimSerialNumber;
+
+                var deviceUuid = new UUID(deviceId.GetHashCode(), ((long)tMgr.GetHashCode() << 32) | serialSim.GetHashCode());
+                var deviceID = deviceUuid.ToString();
+
                 LoadApplication(new App(deviceId, serialSim));
             }
             catch
