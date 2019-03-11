@@ -1,12 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DmobileApp.Register">
+             x:Class="DmobileApp.Register" Title="ลงทะเบียน">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="White">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>-->
+            <Grid Margin="50,0,50,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Source="logo.png" HeightRequest="200" WidthRequest="100" VerticalOptions="End"/>
+                <Entry x:Name="txtCitizen" Grid.Row="1" Placeholder="เลขประจำตัวประชาชน" PlaceholderColor="#bababa" FontSize="16" Keyboard="Numeric"/>
+                <Entry x:Name="txtPhone" Grid.Row="2" Placeholder="หมายเลขโทรศัพท์" PlaceholderColor="#bababa" FontSize="16" Keyboard="Telephone"/>
+                <Entry x:Name="txtPin" Grid.Row="3" Placeholder="หมายเลข PIN" PlaceholderColor="#bababa" FontSize="16" Keyboard="Numeric"/>
+                <Button Text="ลงทะเบียน" BackgroundColor="#385992" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4" Clicked="btnRegister_Clicked"/>
+                <!--<Button Text="ลงทะเบียน" BackgroundColor="DarkOliveGreen" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4"/>-->
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

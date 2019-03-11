@@ -16,9 +16,23 @@ namespace DmobileApp.Concret
                 {
                     public static class User
                     {
-                        public static string getSms = "/api/customer/sms?id=";
-                        public static string getProfile = "/api/customer/profile?id=";
+                        public static string identify = "api/authen/identify?";
+                        public static string register = "api/authen/register";
+                        public static string getSms = "api/customer/sms?id=";
+                        public static string getProfile = "api/customer/profile?id=";
                     }
+                }
+            }
+            public static class Development
+            {
+                public const string Host = "http://localhost:58465";
+                public const string Port = "80";
+                public static class User
+                {
+                    public static string identify = "/api/authen/identify?";
+                    public static string register = "api/authen/register";
+                    public static string getSms = "api/customer/sms?id=";
+                    public static string getProfile = "api/customer/profile?id=";
                 }
             }
         }

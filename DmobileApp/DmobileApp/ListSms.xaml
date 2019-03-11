@@ -4,7 +4,7 @@
              x:Class="DmobileApp.ListSms">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
-            <ListView x:Name="ListView1" RowHeight="60" ItemSelected="message_selected">
+            <ListView x:Name="listSms" RowHeight="100" ItemSelected="message_selected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
