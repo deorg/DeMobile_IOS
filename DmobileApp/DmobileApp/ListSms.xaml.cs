@@ -19,20 +19,25 @@ namespace DmobileApp
         private string Host = Constant.WebService.Production.Host;
         private string getSms = Constant.WebService.Production.Api.User.getSms;
         //private m_profile _profile;
-        public ListSms(int cust_no)
+        public ListSms(profile_data profile)
         {
             InitializeComponent();
+            this.Title = profile.CUST_NAME;
             //_profile = profile;
-            if (cust_no != 0)
+            if (profile != null)
             {
-                var items = Services.User.getSms(cust_no);
-                if (items.data.Count != 0)
+                var items = Services.User.getSms(profile.CUST_NO);
+                if (items.code == 200)
                 {
                     DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
-                    listSms.ItemsSource = items.data;
+                    if (items.data.Count != 0)
+                        listSms.ItemsSource = items.data;
                 }
-                
+                else
+                    DependencyService.Get<IMessage>().longAlert(items.message);
             }
+            else
+                DependencyService.Get<IMessage>().longAlert("ไม่พบข้อมูลของคุณในระบบ SMS");
         }
         //public async void LoadData()
         //{

@@ -17,7 +17,7 @@ using Java.Util;
 
 namespace DmobileApp.Droid
 {
-    [Activity(Label = "DmobileApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "DmobileApp", Icon = "@drawable/logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,8 +39,8 @@ namespace DmobileApp.Droid
                 var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
                 serialSim = tMgr.SimSerialNumber;
 
-                var deviceUuid = new UUID(deviceId.GetHashCode(), ((long)tMgr.GetHashCode() << 32) | serialSim.GetHashCode());
-                var deviceID = deviceUuid.ToString();
+                //var deviceUuid = new UUID(deviceId.GetHashCode(), ((long)tMgr.GetHashCode() << 32) | serialSim.GetHashCode());
+                //var deviceID = deviceUuid.ToString();
 
                 LoadApplication(new App(deviceId, serialSim));
             }

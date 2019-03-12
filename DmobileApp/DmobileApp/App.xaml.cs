@@ -16,7 +16,20 @@ namespace DmobileApp
         public App(string deviceId="", string simSerial="")
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new Register(deviceId, simSerial));
+            //MainPage = new NavigationPage(new ChatSms());
+            var resIdentify = User.identify(deviceId, simSerial);
+            if (resIdentify != null)
+            {
+                if (resIdentify.code == 200)
+                    MainPage = new NavigationPage(new ChatSms(resIdentify.data));
+                else
+                    MainPage = new NavigationPage(new Register(deviceId, simSerial));
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์");
+            }
+
             //MainPage = new NavigationPage(new ListSms(119954));
             //var profile = User.identify(deviceId, simSerial);
             //if (profile.code == 200)

@@ -34,7 +34,7 @@ namespace DmobileApp
                 if(result.code == 200)
                 {
                     DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");                  
-                    Navigation.PushAsync(new ListSms(result.data.CUST_NO));
+                    Navigation.PushAsync(new ListSms(result.data));
                     Navigation.RemovePage(this);
                 }
             }

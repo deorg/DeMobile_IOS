@@ -24,9 +24,9 @@ namespace DmobileApp
             var navigationPage = new NavigationPage(new Profile());
             navigationPage.Title = "Profile";
             Children.Add(navigationPage);
-            navigationPage = new NavigationPage(new ListSms(119954));
-            navigationPage.Title = "SMS";
-            Children.Add(navigationPage);
+            //navigationPage = new NavigationPage(new ListSms(119954));
+            //navigationPage.Title = "SMS";
+            //Children.Add(navigationPage);
         }
         private async Task<bool> identifyAsync()
         {
