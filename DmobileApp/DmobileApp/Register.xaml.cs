@@ -27,18 +27,26 @@ namespace DmobileApp
             data.phone_no = txtPhone.Text;
             data.pin = txtPin.Text;
             data.device_id = _deviceID;
-            data.serial_sim = _simSerial;
+            data.serial_sim = "1111111111";
+            data.platform = "IOS";
             var result = Services.User.register(data);
             if(result != null)
             {
                 if(result.code == 200)
                 {
                     DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");                  
-                    Navigation.PushAsync(new ListSms(result.data));
+                    Navigation.PushAsync(new ChatSms(result.data));
                     Navigation.RemovePage(this);
                 }
+                else
+                {
+                    DependencyService.Get<IMessage>().longAlert(result.message);
+                }
             }
-            
+            else
+            {
+                DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
+            }
         }
     }
 }

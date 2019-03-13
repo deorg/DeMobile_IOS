@@ -11,9 +11,9 @@ namespace DmobileApp.Services
 {
     public static class User
     {
+        private static string Host = Constant.WebService.Production.Host;
         public static m_profile identify(string deviceId, string serialSim)
         {
-            string Host = Constant.WebService.Production.Host;
             string IdentifyUrl = $"{Constant.WebService.Production.Api.User.identify}serial_sim={serialSim}&deviceId={deviceId}&app_version=1";
             using (var client = new HttpClient())
             {
@@ -38,7 +38,6 @@ namespace DmobileApp.Services
         }
         public static m_sms getSms(int cust_no)
         {
-            string Host = Constant.WebService.Production.Host;
             string SmsUrl = Constant.WebService.Production.Api.User.getSms+cust_no.ToString();
             using(var client = new HttpClient())
             {
@@ -60,26 +59,60 @@ namespace DmobileApp.Services
                 }
             }
         }
+        public static m_custMessageRes sendSms(m_custMessage message)
+        {
+            string sendSmsUrl = Constant.WebService.Production.Api.User.sendSms;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string postBody = JsonConvert.SerializeObject(message);
+                    var content = new StringContent(postBody, Encoding.UTF8, "application/json");
+                    var response = client.PostAsync(sendSmsUrl, content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseObj = JsonConvert.DeserializeObject<m_custMessageRes>(response.Content.ReadAsStringAsync().Result);
+                        return responseObj;
+                    }
+                    else
+                        return null;
+                }
+                finally
+                {
+                    client.Dispose();
+                }
+            }
+        }
         public static m_profile register(m_register value)
         {
-            string Host = Constant.WebService.Production.Host;
             string registerUrl = Constant.WebService.Production.Api.User.register;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Host);
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-                string postBody = JsonConvert.SerializeObject(value);
-                var content = new StringContent(postBody, Encoding.UTF8, "application/json");
-                var response = client.PostAsync(registerUrl, content).Result;
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    var responseObj = JsonConvert.DeserializeObject<m_profile>(response.Content.ReadAsStringAsync().Result);
-                    return responseObj;
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string postBody = JsonConvert.SerializeObject(value);
+                    var content = new StringContent(postBody, Encoding.UTF8, "application/json");
+                    var response = client.PostAsync(registerUrl, content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseObj = JsonConvert.DeserializeObject<m_profile>(response.Content.ReadAsStringAsync().Result);
+                        return responseObj;
+                    }
+                    else
+                        return null;
                 }
-                else
-                    return null;
+                finally
+                {
+                    client.Dispose();
+                }
             }
         }
     }

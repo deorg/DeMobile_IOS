@@ -5,16 +5,28 @@ using System.Text;
 
 namespace DmobileApp.Model
 {
+    public class m_custMessage
+    {
+        public int sms010_pk { get; set; }
+        public int cust_no { get; set; }
+        public string message { get; set; }
+    }
     public class m_sms
     {
         public int code { get; set; }
         public string message { get; set; }
         public List<sms_data> data { get; set; } 
     }
+    public class m_custMessageRes
+    {
+        public int code { get; set; }
+        public string message { get; set; }
+        public sms_data data { get; set; }
+    }
     public class sms_data
     {
         [JsonProperty("SMS010_PK")]
-        public string sms010_pk { get; set; }
+        public int sms010_pk { get; set; }
         [JsonProperty("CUST_NO")]
         public int cust_no { get; set; }
         [JsonProperty("CON_NO")]

@@ -36,7 +36,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Entry Grid.Column="0" FontSize="18" Placeholder="Message" Text="{Binding OutGoingText}"></Entry>
+                <Entry x:Name="txtMessage" Grid.Column="0" FontSize="18" Placeholder="Message" Text="{Binding OutGoingText}"></Entry>
                 <Button Grid.Column="1" Text="Send" Command="{Binding SendCommand}" Clicked="Send_Clicked"></Button>
             </Grid>
         </StackLayout>
