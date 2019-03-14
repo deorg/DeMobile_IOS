@@ -140,6 +140,8 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -153,8 +155,11 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\DmobileApp\DmobileApp.csproj">
-      <Project>{A5F9C9CD-3FAC-4439-A693-B9C6B176C338}</Project>
+      <Project>{7EC74695-300A-4C92-BC19-AF5028EF22F8}</Project>
       <Name>DmobileApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\logo.imageset\" />
   </ItemGroup>
 </Project>

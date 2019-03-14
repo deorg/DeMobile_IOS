@@ -39,7 +39,7 @@ namespace DmobileApp.ViewModels
                     var items = Services.User.getSms(cust_no);
                     if (items.code == 200)
                     {
-                        DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+                        //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
                         if (items.data.Count != 0)
                         {
                             foreach (var msg in items.data)
@@ -79,7 +79,8 @@ namespace DmobileApp.ViewModels
             }
             catch(Exception e)
             {
-                DependencyService.Get<IMessage>().longAlert(e.Message);
+                Console.WriteLine(e.Message);
+               // DependencyService.Get<IMessage>().longAlert(e.Message);
             }
         }
         // public List<MessageViewModel> Messages { get; set; } = new List<MessageViewModel>();
