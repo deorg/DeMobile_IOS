@@ -36,8 +36,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Entry x:Name="txtMessage" Grid.Column="0" FontSize="18" Placeholder="Message" Text="{Binding OutGoingText}"></Entry>
-                <Button Grid.Column="1" Text="Send" Command="{Binding SendCommand}" Clicked="Send_Clicked"></Button>
+                <Entry x:Name="txtMessage" Grid.Column="0" FontSize="18" Placeholder="ข้อความ" Text="{Binding OutGoingText}"></Entry>
+                <Button Grid.Column="1" Text="ส่ง" Command="{Binding SendCommand}" Clicked="Send_Clicked" FontSize="18"></Button>
             </Grid>
         </StackLayout>
     </StackLayout>

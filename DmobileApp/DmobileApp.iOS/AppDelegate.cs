@@ -23,7 +23,8 @@ namespace DmobileApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            var device_id = UIDevice.CurrentDevice.IdentifierForVendor.ToString();
+            LoadApplication(new App(device_id, "1111111111"));
 
             return base.FinishedLaunching(app, options);
         }

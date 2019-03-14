@@ -27,8 +27,16 @@ namespace DmobileApp
             data.phone_no = txtPhone.Text;
             data.pin = txtPin.Text;
             data.device_id = _deviceID;
-            data.serial_sim = "1111111111";
-            data.platform = "IOS";
+            if(Device.RuntimePlatform == Device.iOS)
+            {
+                data.serial_sim = "1111111111";
+                data.platform = "IOS";
+            }
+            else if(Device.RuntimePlatform == Device.Android)
+            {
+                data.serial_sim = _simSerial;
+                data.platform = "ANDROID";
+            }
             var result = Services.User.register(data);
             if(result != null)
             {

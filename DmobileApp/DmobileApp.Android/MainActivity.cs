@@ -14,14 +14,17 @@ using Android.Support.V4.Content;
 using Android.Support.Design.Widget;
 using Java.Lang;
 using Java.Util;
+using System.Threading.Tasks;
 
 namespace DmobileApp.Droid
 {
     [Activity(Label = "DmobileApp", Icon = "@drawable/logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -46,9 +49,97 @@ namespace DmobileApp.Droid
             }
             catch
             {
-                LoadApplication(new App(deviceId, serialSim));
+                TryToGetPermissions();
+                //LoadApplication(new App(deviceId, serialSim));
             }
         }
+        #region RuntimePermissions
+
+        /*async Task*/void TryToGetPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt >= 23)
+            {
+                /*await*/ GetPermissionsAsync();
+                return;
+            }
+        }
+        const int RequestLocationId = 0;
+
+        readonly string[] PermissionsGroupLocation =
+            {
+                            //TODO add more permissions
+                            Manifest.Permission.ReadPhoneNumbers,
+                            Manifest.Permission.ReadPhoneState,
+             };
+        /*async Task*/ void GetPermissionsAsync()
+        {
+            const string permission = Manifest.Permission.ReadPhoneState;
+
+            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
+            {
+                //TODO change the message to show the permissions name
+                Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
+                return;
+            }
+
+            if (ShouldShowRequestPermissionRationale(permission))
+            {
+                //set alert for executing the task
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.SetTitle("ขออนุญาตเข้าถึงข้อมูลเครื่อง");
+                alert.SetMessage("ทางบริษัท โดเมสดิค ลิสซิง ขออนุญาติเข้าถึงข้อมูลหมายเลขโทรศัพท์ของลูกค้าเพื่อใช้ในการยืนยันตัวตน");
+                alert.SetPositiveButton("อนูญาตเข้าถึงข้อมูล", (senderAlert, args) =>
+                {
+                    RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+                });
+
+                alert.SetNegativeButton("ไม่อนุญาต", (senderAlert, args) =>
+                {
+                    Toast.MakeText(this, "ไม่อนุญาต", ToastLength.Short).Show();
+                    this.FinishAffinity();
+                });
+
+                Dialog dialog = alert.Create();
+                dialog.SetCanceledOnTouchOutside(false);
+                dialog.Show();
+
+
+                return;
+            }
+
+            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+
+        }
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            switch (requestCode)
+            {
+                case RequestLocationId:
+                    {
+                        if (grantResults[0] == (int)Android.Content.PM.Permission.Granted)
+                        {
+                            Toast.MakeText(this, "ข้อมูลหมายเลขโทรศัพท์ได้รับการอนุญาตแล้ว", ToastLength.Short).Show();
+                            var context = Application.Context;
+                            var deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
+
+                            //string serialSim = "8966051405494794566";
+                            var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
+                            var serialSim = tMgr.SimSerialNumber;
+                            LoadApplication(new App(deviceId, serialSim));
+                        }
+                        else
+                        {
+                            //Permission Denied :(
+                            Toast.MakeText(this, "ข้อมูลหมายเลขโทรศัพท์ไม่ได้รับการอนุญาต!", ToastLength.Short).Show();
+                            this.FinishAffinity();
+                        }
+                    }
+                    break;
+            }
+            //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        #endregion
     }
 
 }

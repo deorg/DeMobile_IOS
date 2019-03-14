@@ -16,9 +16,9 @@
             <Grid Margin="50,0,50,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
@@ -26,11 +26,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Image Source="logo.png" HeightRequest="200" WidthRequest="100" VerticalOptions="End"/>
-                <Entry x:Name="txtCitizen" Grid.Row="1" Placeholder="เลขประจำตัวประชาชน" PlaceholderColor="#bababa" FontSize="16" Keyboard="Numeric"/>
-                <Entry x:Name="txtPhone" Grid.Row="2" Placeholder="หมายเลขโทรศัพท์" PlaceholderColor="#bababa" FontSize="16" Keyboard="Telephone"/>
-                <Entry x:Name="txtPin" Grid.Row="3" Placeholder="หมายเลข PIN" PlaceholderColor="#bababa" FontSize="16" Keyboard="Numeric"/>
-                <Button Text="ลงทะเบียน" BackgroundColor="#385992" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4" Clicked="btnRegister_Clicked"/>
-                <!--<Button Text="ลงทะเบียน" BackgroundColor="DarkOliveGreen" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4"/>-->
+                <Entry x:Name="txtCitizen" Grid.Row="1" Placeholder="เลขประจำตัวประชาชน" PlaceholderColor="#d1cccc" FontSize="28" Keyboard="Numeric" FontAttributes="Bold"/>
+                <Entry x:Name="txtPhone" Grid.Row="2" Placeholder="หมายเลขโทรศัพท์" PlaceholderColor="#d1cccc" FontSize="28" Keyboard="Telephone" FontAttributes="Bold"/>
+                <Entry x:Name="txtPin" Grid.Row="3" Placeholder="หมายเลข PIN" PlaceholderColor="#d1cccc" FontSize="28" Keyboard="Numeric" FontAttributes="Bold"/>
+                <!--<Button Text="ลงทะเบียน" BackgroundColor="#385992" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4" Clicked="btnRegister_Clicked"/>-->
+                <Button Text="ลงทะเบียน" BackgroundColor="#036315" TextColor="White" HeightRequest="60" FontSize="28" VerticalOptions="Start" Grid.Row="4" Clicked="btnRegister_Clicked"/>
             </Grid>
         </Grid>
     </ContentPage.Content>
