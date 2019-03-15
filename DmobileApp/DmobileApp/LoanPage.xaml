@@ -1,5 +1,48 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DmobileApp.LoanPage">
     <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <ListView x:Name="listContract" RowHeight="200" Footer="">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="20, 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding con_no}" FontAttributes="Bold" FontSize="24"/>
+                                <Label Grid.Column="0" Grid.Row="1" Text="ราคาเช่าซื้อ" FontSize="16"/>
+                                <Label Grid.Column="0" Grid.Row="2" Text="งวดละ" FontSize="16"/>
+                                <Label Grid.Column="0" Grid.Row="3" Text="จำนวนงวด" FontSize="16"/>
+                                <Label Grid.Column="0" Grid.Row="4" Text="ยอดคงเหลือ" Font="16"/>
+                                <Label Grid.Column="0" Grid.Row="5" Text="ส่วนลด" Font="16"/>
+                                
+                             
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding tot_amt}" FontSize="20" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding pay_amt}" FontSize="20" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="3" Text="{Binding period}" FontSize="20" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="4" Text="{Binding bal_amt}" Font="20" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="5" Text="{Binding disc_amt}" Font="20" HorizontalOptions="End"/>
+                            </Grid>
+
+                            <!--<StackLayout Orientation="Vertical" Padding="8,0,8,0">
+                                <Label Text="{Binding SMS_TIME}" TextColor="#000" FontSize="14" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding SMS_NOTE}" TextColor="#000" LineBreakMode="TailTruncation" />
+                            </StackLayout>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

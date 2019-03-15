@@ -36,6 +36,29 @@ namespace DmobileApp.Services
                 }
             }
         }
+        public static m_contract getContract(int cust_no)
+        {
+            string LoanUrl = Constant.WebService.Production.Api.User.getContract + cust_no.ToString();
+            using(var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Host);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.GetAsync(LoanUrl).Result;
+                var content = response.Content.ReadAsStringAsync().Result;
+                var loan = JsonConvert.DeserializeObject<m_contract>(content);
+                if (response.IsSuccessStatusCode)
+                {
+                    client.Dispose();
+                    return loan;
+                }
+                else
+                {
+                    client.Dispose();
+                    return null;
+                }
+            }
+        }
         public static m_sms getSms(int cust_no)
         {
             string SmsUrl = Constant.WebService.Production.Api.User.getSms+cust_no.ToString();
