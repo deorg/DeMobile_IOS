@@ -39,7 +39,8 @@ namespace DmobileApp.ViewModels
                     var items = Services.User.getSms(cust_no);
                     if (items.code == 200)
                     {
-                        //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+                        if (Device.RuntimePlatform == Device.Android)
+                            DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
                         if (items.data.Count != 0)
                         {
                             foreach (var msg in items.data)
@@ -48,13 +49,16 @@ namespace DmobileApp.ViewModels
                                 {
                                     Text = msg.sms_note,
                                     IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
-                                    MessageDateTime = msg.sms_time
+                                    MessageDateTime = DateTime.Now
                                 });
                             }
                         }
                     }
                     else
-                        DependencyService.Get<IMessage>().longAlert(items.message);
+                    {
+                        if(Device.RuntimePlatform == Device.Android)
+                            DependencyService.Get<IMessage>().longAlert(items.message);
+                    }
                 }
                 else
                     DependencyService.Get<IMessage>().longAlert("ไม่พบข้อมูลของคุณในระบบ SMS");
@@ -80,8 +84,9 @@ namespace DmobileApp.ViewModels
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-               // DependencyService.Get<IMessage>().longAlert(e.Message);
-            }
+                if(Device.RuntimePlatform == Device.Android)
+                    DependencyService.Get<IMessage>().longAlert(e.Message);
+            }   
         }
         // public List<MessageViewModel> Messages { get; set; } = new List<MessageViewModel>();
     }

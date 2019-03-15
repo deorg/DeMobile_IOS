@@ -21,7 +21,7 @@ namespace DmobileApp
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)
-                    MainPage = new NavigationPage(new ChatSms(resIdentify.data));
+                    MainPage = new NavigationPage(new Mainpage(resIdentify.data));
                 else
                     MainPage = new NavigationPage(new Register(deviceId, simSerial));
             }

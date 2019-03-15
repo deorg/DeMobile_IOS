@@ -23,10 +23,19 @@ namespace DmobileApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            //var device_id = UIDevice.CurrentDevice.IdentifierForVendor.ToString();
-            LoadApplication(new App("knjlj53534534534", "1111111111"));
+            var device_id = UIDevice.CurrentDevice.IdentifierForVendor.ToString();
+            InitThaiCalendarCrashFix();
+            LoadApplication(new App(device_id, "1111111111"));
 
             return base.FinishedLaunching(app, options);
+        }
+        private static void InitThaiCalendarCrashFix()
+        {
+            var localeIdentifier = NSLocale.CurrentLocale.LocaleIdentifier;
+            if (localeIdentifier == "th_TH")
+            {
+                new System.Globalization.ThaiBuddhistCalendar();
+            }
         }
     }
 }

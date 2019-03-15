@@ -42,18 +42,21 @@ namespace DmobileApp
             {
                 if(result.code == 200)
                 {
-                    DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");                  
+                    if(Device.RuntimePlatform == Device.Android)
+                        DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");                  
                     Navigation.PushAsync(new ChatSms(result.data));
                     Navigation.RemovePage(this);
                 }
                 else
                 {
-                    DependencyService.Get<IMessage>().longAlert(result.message);
+                    if(Device.RuntimePlatform == Device.Android)
+                        DependencyService.Get<IMessage>().longAlert(result.message);
                 }
             }
             else
             {
-                DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
+                if(Device.RuntimePlatform == Device.Android)
+                    DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
             }
         }
     }

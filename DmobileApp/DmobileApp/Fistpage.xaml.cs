@@ -20,7 +20,7 @@ namespace DmobileApp
         private void btnGreet_Clicked(object sender, EventArgs e)
         {
             DisplayAlert("Greeting", $"Hello Mr.{txtName.Text}", "OK");
-            Navigation.PushAsync(new Mainpage());
+           // Navigation.PushAsync(new Mainpage());
 
         }
         private void btnClear_Clicked(object sender, EventArgs e)

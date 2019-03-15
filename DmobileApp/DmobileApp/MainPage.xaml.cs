@@ -18,15 +18,16 @@ namespace DmobileApp
     {
         private string Host = Constant.WebService.Production.Host;
         private string Identify = Constant.WebService.Production.Api.User.identify;
-        public Mainpage()
+        public Mainpage(profile_data profile)
         {
             InitializeComponent();
-            var navigationPage = new NavigationPage(new Profile());
-            navigationPage.Title = "Profile";
+            this.Title = string.Empty;
+            var navigationPage = new NavigationPage(new ChatSms(profile));
+            navigationPage.Title = "ข้อความแจ้งเตือน";
             Children.Add(navigationPage);
-            //navigationPage = new NavigationPage(new ListSms(119954));
-            //navigationPage.Title = "SMS";
-            //Children.Add(navigationPage);
+            navigationPage = new NavigationPage(new LoanPage(profile));
+            navigationPage.Title = "สัญญา";
+            Children.Add(navigationPage);
         }
         private async Task<bool> identifyAsync()
         {
