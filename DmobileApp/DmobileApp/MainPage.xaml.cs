@@ -25,9 +25,9 @@ namespace DmobileApp
             var navigationPage = new NavigationPage(new ChatSms(profile));
             navigationPage.Title = "ข้อความแจ้งเตือน";
             Children.Add(navigationPage);
-            navigationPage = new NavigationPage(new LoanPage(profile));
-            navigationPage.Title = "สัญญา";
-            Children.Add(navigationPage);
+            //navigationPage = new NavigationPage(new LoanPage(profile));
+            //navigationPage.Title = "สัญญา";
+            //Children.Add(navigationPage);
         }
         //private async Task<bool> identifyAsync()
         //{

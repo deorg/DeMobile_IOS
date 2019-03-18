@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DmobileApp.Payment">
+    <ContentPage.Content>
+       <StackLayout Padding="20, 50">
+            <Label Text="2028502834" HorizontalOptions="Center" FontAttributes="Bold" FontSize="36"></Label>
+            <Grid RowSpacing="20" Padding="0, 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="ยอดเงินคงเหลือ" Grid.Row="0" FontSize="28"/>
+                <Label Grid.Column="0" Text="ส่วนลด" Grid.Row="1" FontSize="28"/>
+                <Entry x:Name="txtBanlance" Text="{Binding bal_amt}" FontSize="28" Grid.Column="1" Grid.Row="0" HorizontalOptions="End"/>
+                <Entry x:Name="txtDiscount" Text="{Binding disc_amt}" FontSize="28" Grid.Column="1" Grid.Row="1" HorizontalOptions="End"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="จำนวนเงินที่ต้องการชำระ" FontSize="32" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
+                <Entry Text="{Binding tot_amt}" Grid.Column="0" Grid.Row="1" FontSize="32" FontAttributes="Bold" WidthRequest="50" HorizontalTextAlignment="End"/>
+                <Button Text="ตามงวด" Grid.Row="1" FontSize="18" Grid.Column="1"/>
+                <Button Text="ปิดบัญชี" Grid.Row="1" FontSize="18" Grid.Column="2"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="ชำระผ่านธนาคาร" FontSize="32" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"/>
+                
+            </Grid>
+            
+        </StackLayout>
+<!--        <ListView x:Name="listBanks">
+            
+        </ListView>-->
+    </ContentPage.Content>
+</ContentPage>

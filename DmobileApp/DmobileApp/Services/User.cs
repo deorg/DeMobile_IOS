@@ -15,25 +15,33 @@ namespace DmobileApp.Services
         public static m_profile identify(string deviceId, string serialSim)
         {
             string IdentifyUrl = $"{Constant.WebService.Production.Api.User.identify}serial_sim={serialSim}&deviceId={deviceId}&app_version=1";
-            using (var client = new HttpClient())
+            try
             {
-               // var RestURL = $"{Host}{Identify}serial_sim={serialSim}&deviceId={deviceId}&app_version=1";      
-                client.BaseAddress = new Uri(Host);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (var client = new HttpClient())
+                {
+                    // var RestURL = $"{Host}{Identify}serial_sim={serialSim}&deviceId={deviceId}&app_version=1";      
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync(IdentifyUrl).Result;
-                var content = response.Content.ReadAsStringAsync().Result;
-                var profile = JsonConvert.DeserializeObject<m_profile>(content);
-                if (response.IsSuccessStatusCode)
-                {
-                    client.Dispose();
-                    return profile;
+                    var response = client.GetAsync(IdentifyUrl).Result;
+                    var content = response.Content.ReadAsStringAsync().Result;
+                    var profile = JsonConvert.DeserializeObject<m_profile>(content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        client.Dispose();
+                        return profile;
+                    }
+                    else
+                    {
+                        client.Dispose();
+                        return null;
+                    }
                 }
-                else
-                {
-                    client.Dispose();
-                    return null;
-                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
         public static m_contract getContract(int cust_no)

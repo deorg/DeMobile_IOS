@@ -41,5 +41,11 @@ namespace DmobileApp
                 listContract.ItemsSource = loan.data;
             }
         }
+        private void OnSelected_contract(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as contract_data;
+            Navigation.PushAsync(new Payment(item));
+           // DisplayAlert("Selection", $"You selected {item.con_no}", "OK");
+        }
     }
 }

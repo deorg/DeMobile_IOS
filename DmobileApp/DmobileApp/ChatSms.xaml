@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DmobileApp.ChatSms"
              xmlns:local="clr-namespace:DmobileApp;assembly=DmobileApp"
-             >
+             BackgroundColor="#7292C1" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:SmsDataTemplateSelector x:Key="MessageTemplateSelector"></local:SmsDataTemplateSelector>
@@ -18,7 +18,9 @@
             ItemSelected="MyListView_OnItemSelected"
             ItemTapped="MyListView_OnItemTapped"
             SeparatorVisibility="None"
-            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}">
+            RelativeLayout.HeightConstraint="{ConstraintExpression 
+            Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"
+            BackgroundColor="#7292C1">
         </ListView>
         <!--</ScrollView>-->
         <StackLayout>

@@ -24,7 +24,7 @@ namespace DmobileApp
             BindingContext = new MainPageViewModel(profile.CUST_NO);
             //scrollList.ScrollToAsync(MessageControls, ScrollToPosition.End, true);
             var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
-            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            MessagesListView.ScrollTo(last, ScrollToPosition.End, false);
            // MessagesListView.ScrollTo(MessagesListView.ItemsSource.Cast<Grid>().Count(), ScrollToPosition.End, true);
             //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
         }
