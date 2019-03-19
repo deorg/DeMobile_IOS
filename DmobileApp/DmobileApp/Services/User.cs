@@ -18,8 +18,7 @@ namespace DmobileApp.Services
             try
             {
                 using (var client = new HttpClient())
-                {
-                    // var RestURL = $"{Host}{Identify}serial_sim={serialSim}&deviceId={deviceId}&app_version=1";      
+                { 
                     client.BaseAddress = new Uri(Host);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

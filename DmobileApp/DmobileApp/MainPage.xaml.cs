@@ -23,11 +23,20 @@ namespace DmobileApp
             InitializeComponent();
             this.Title = string.Empty;
             var navigationPage = new NavigationPage(new ChatSms(profile));
-            navigationPage.Title = "ข้อความแจ้งเตือน";
+            navigationPage.Title = "ข้อความ";
+            navigationPage.BarBackgroundColor = Color.White;
+            navigationPage.BarTextColor = Color.Teal;
+            //navigationPage.Icon = "message.png";
             Children.Add(navigationPage);
-            //navigationPage = new NavigationPage(new LoanPage(profile));
-            //navigationPage.Title = "สัญญา";
-            //Children.Add(navigationPage);
+            if (profile.PERMIT == "BOTH")
+            {
+                navigationPage = new NavigationPage(new LoanPage(profile));
+                navigationPage.Title = "สัญญา";
+                // navigationPage.Icon = "assignment.png";
+                navigationPage.BarBackgroundColor = Color.White;
+                navigationPage.BarTextColor = Color.Teal;
+                Children.Add(navigationPage);
+            }
         }
         //private async Task<bool> identifyAsync()
         //{

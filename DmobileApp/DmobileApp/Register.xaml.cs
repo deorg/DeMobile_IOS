@@ -34,7 +34,7 @@ namespace DmobileApp
             }
             else if(Device.RuntimePlatform == Device.Android)
             {
-                data.serial_sim = _simSerial;
+                data.serial_sim = "2222222222";
                 data.platform = "ANDROID";
             }
             var result = Services.User.register(data);
@@ -44,7 +44,7 @@ namespace DmobileApp
                 {
                     if(Device.RuntimePlatform == Device.Android)
                         DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");                  
-                    Navigation.PushAsync(new ChatSms(result.data));
+                    Navigation.PushAsync(new Mainpage(result.data));
                     Navigation.RemovePage(this);
                 }
                 else

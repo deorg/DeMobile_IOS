@@ -28,6 +28,7 @@ namespace DmobileApp.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
@@ -37,107 +38,103 @@ namespace DmobileApp.Droid
             {
                 var context = Application.Context;
                 deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
-                
-                //string serialSim = "8966051405494794566";
-                var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
-                serialSim = tMgr.SimSerialNumber;
 
-                //var deviceUuid = new UUID(deviceId.GetHashCode(), ((long)tMgr.GetHashCode() << 32) | serialSim.GetHashCode());
-                //var deviceID = deviceUuid.ToString();
-
-                LoadApplication(new App(deviceId, serialSim));
+                //var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
+                //serialSim = tMgr.SimSerialNumber;
+               // ActionBar.SetIcon(Resource.Drawable.logo);
+                LoadApplication(new App(deviceId, "2222222222"));
             }
-            catch
+            catch(System.Exception ex)
             {
-                TryToGetPermissions();
-                //LoadApplication(new App(deviceId, serialSim));
+                // TryToGetPermissions();
+                Console.WriteLine(ex.Message);
             }
         }
         #region RuntimePermissions
 
-        /*async Task*/void TryToGetPermissions()
-        {
-            if ((int)Build.VERSION.SdkInt >= 23)
-            {
-                /*await*/ GetPermissionsAsync();
-                return;
-            }
-        }
-        const int RequestLocationId = 0;
+        ///*async Task*/void TryToGetPermissions()
+        //{
+        //    if ((int)Build.VERSION.SdkInt >= 23)
+        //    {
+        //        /*await*/ GetPermissionsAsync();
+        //        return;
+        //    }
+        //}
+        //const int RequestLocationId = 0;
 
-        readonly string[] PermissionsGroupLocation =
-            {
-                            //TODO add more permissions
-                            Manifest.Permission.ReadPhoneNumbers,
-                            Manifest.Permission.ReadPhoneState,
-             };
-        /*async Task*/ void GetPermissionsAsync()
-        {
-            const string permission = Manifest.Permission.ReadPhoneState;
+        //readonly string[] PermissionsGroupLocation =
+        //    {
+        //                    //TODO add more permissions
+        //                    Manifest.Permission.ReadPhoneNumbers,
+        //                    Manifest.Permission.ReadPhoneState,
+        //     };
+        ///*async Task*/ void GetPermissionsAsync()
+        //{
+        //    const string permission = Manifest.Permission.ReadPhoneState;
 
-            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
-            {
-                //TODO change the message to show the permissions name
-                Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
-                return;
-            }
+        //    if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
+        //    {
+        //        //TODO change the message to show the permissions name
+        //        Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
+        //        return;
+        //    }
 
-            if (ShouldShowRequestPermissionRationale(permission))
-            {
-                //set alert for executing the task
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.SetTitle("ขออนุญาตเข้าถึงข้อมูลเครื่อง");
-                alert.SetMessage("ทางบริษัท โดเมสดิค ลิสซิง ขออนุญาติเข้าถึงข้อมูลหมายเลขโทรศัพท์ของลูกค้าเพื่อใช้ในการยืนยันตัวตน");
-                alert.SetPositiveButton("อนูญาตเข้าถึงข้อมูล", (senderAlert, args) =>
-                {
-                    RequestPermissions(PermissionsGroupLocation, RequestLocationId);
-                });
+        //    if (ShouldShowRequestPermissionRationale(permission))
+        //    {
+        //        //set alert for executing the task
+        //        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        //        alert.SetTitle("ขออนุญาตเข้าถึงข้อมูลเครื่อง");
+        //        alert.SetMessage("ทางบริษัท โดเมสดิค ลิสซิง ขออนุญาติเข้าถึงข้อมูลหมายเลขโทรศัพท์ของลูกค้าเพื่อใช้ในการยืนยันตัวตน");
+        //        alert.SetPositiveButton("อนูญาตเข้าถึงข้อมูล", (senderAlert, args) =>
+        //        {
+        //            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+        //        });
 
-                alert.SetNegativeButton("ไม่อนุญาต", (senderAlert, args) =>
-                {
-                    Toast.MakeText(this, "ไม่อนุญาต", ToastLength.Short).Show();
-                    this.FinishAffinity();
-                });
+        //        alert.SetNegativeButton("ไม่อนุญาต", (senderAlert, args) =>
+        //        {
+        //            Toast.MakeText(this, "ไม่อนุญาต", ToastLength.Short).Show();
+        //            this.FinishAffinity();
+        //        });
 
-                Dialog dialog = alert.Create();
-                dialog.SetCanceledOnTouchOutside(false);
-                dialog.Show();
+        //        Dialog dialog = alert.Create();
+        //        dialog.SetCanceledOnTouchOutside(false);
+        //        dialog.Show();
 
 
-                return;
-            }
+        //        return;
+        //    }
 
-            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+        //    RequestPermissions(PermissionsGroupLocation, RequestLocationId);
 
-        }
-        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            switch (requestCode)
-            {
-                case RequestLocationId:
-                    {
-                        if (grantResults[0] == (int)Android.Content.PM.Permission.Granted)
-                        {
-                            Toast.MakeText(this, "ข้อมูลหมายเลขโทรศัพท์ได้รับการอนุญาตแล้ว", ToastLength.Short).Show();
-                            var context = Application.Context;
-                            var deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
+        //}
+        //public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        //{
+        //    switch (requestCode)
+        //    {
+        //        case RequestLocationId:
+        //            {
+        //                if (grantResults[0] == (int)Android.Content.PM.Permission.Granted)
+        //                {
+        //                    Toast.MakeText(this, "ข้อมูลหมายเลขโทรศัพท์ได้รับการอนุญาตแล้ว", ToastLength.Short).Show();
+        //                    var context = Application.Context;
+        //                    var deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
 
-                            //string serialSim = "8966051405494794566";
-                            var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
-                            var serialSim = tMgr.SimSerialNumber;
-                            LoadApplication(new App(deviceId, serialSim));
-                        }
-                        else
-                        {
-                            //Permission Denied :(
-                            Toast.MakeText(this, "ข้อมูลหมายเลขโทรศัพท์ไม่ได้รับการอนุญาต!", ToastLength.Short).Show();
-                            this.FinishAffinity();
-                        }
-                    }
-                    break;
-            }
-            //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        //                    //string serialSim = "8966051405494794566";
+        //                    var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
+        //                    var serialSim = tMgr.SimSerialNumber;
+        //                    LoadApplication(new App(deviceId, serialSim));
+        //                }
+        //                else
+        //                {
+        //                    //Permission Denied :(
+        //                    Toast.MakeText(this, "ข้อมูลหมายเลขโทรศัพท์ไม่ได้รับการอนุญาต!", ToastLength.Short).Show();
+        //                    this.FinishAffinity();
+        //                }
+        //            }
+        //            break;
+        //    }
+        //    //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //}
 
         #endregion
     }

@@ -16,8 +16,8 @@ namespace DmobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListSms : ContentPage
     {
-        private string Host = Constant.WebService.Production.Host;
-        private string getSms = Constant.WebService.Production.Api.User.getSms;
+        //private string Host = Constant.WebService.Production.Host;
+        //private string getSms = Constant.WebService.Production.Api.User.getSms;
         //private m_profile _profile;
         public ListSms(profile_data profile)
         {
