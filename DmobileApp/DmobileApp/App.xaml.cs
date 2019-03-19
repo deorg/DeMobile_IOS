@@ -21,7 +21,14 @@ namespace DmobileApp
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)
-                    MainPage = new NavigationPage(new Mainpage(resIdentify.data));
+                {
+                    if (resIdentify.data.PERMIT == "SMS")
+                        MainPage = new NavigationPage(new ChatSms(resIdentify.data));
+                    else if (resIdentify.data.PERMIT == "PAYMENT")
+                        MainPage = new NavigationPage(new LoanPage(resIdentify.data));
+                    else
+                        MainPage = new NavigationPage(new Mainpage(resIdentify.data));
+                }
                 else
                     MainPage = new NavigationPage(new Register(deviceId, simSerial));
             }
