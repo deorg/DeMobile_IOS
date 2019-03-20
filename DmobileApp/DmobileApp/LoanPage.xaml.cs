@@ -34,7 +34,15 @@ namespace DmobileApp
             if (_profile.PERMIT == "BOTH" || _profile.PERMIT == "PAYMENT")
             {
                 var item = e.Item as contract_data;
+                //var navigationPage = new NavigationPage(new Payment(_profile, item, _deviceId));
+                //navigationPage.Title = "ข้อความ";
+                //navigationPage.BarBackgroundColor = Color.White;
+                //navigationPage.BarTextColor = Color.Teal;
+                //Navigation.PushAsync(navigationPage);
+               
                 Navigation.PushAsync(new Payment(_profile, item, _deviceId));
+
+                //Application.Current.MainPage = new NavigationPage(navigationPage);
             }
         }
     }

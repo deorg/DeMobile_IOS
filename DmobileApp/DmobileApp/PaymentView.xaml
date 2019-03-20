@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DmobileApp.PaymentView">
-    <ContentPage.Content>
-        <WebView x:Name="bankView" Navigated="Handle_Navigated"></WebView>
-    </ContentPage.Content>
+
+        <StackLayout>
+        <ProgressBar x:Name="progress" IsVisible="true" Progress="0.2" HorizontalOptions="FillAndExpand" ProgressColor="Teal"/>
+        <WebView x:Name="bankView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Navigated="Handle_Navigated" Navigating="Handle_Navigating"></WebView>
+        </StackLayout>
+   
 </ContentPage>

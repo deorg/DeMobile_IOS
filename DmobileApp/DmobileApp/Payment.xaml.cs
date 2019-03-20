@@ -77,8 +77,8 @@ namespace DmobileApp
                     {
                         if (result.data.Code == 200)
                         {
-                            Application.Current.MainPage = new PaymentView(result.data.PaymentUrl, _profile, _deviceId);
-                              //  NavigationPage(new Mainpage(resIdentify.data, deviceId));
+                            Application.Current.MainPage = new NavigationPage(new PaymentView(result.data.PaymentUrl, _profile, _deviceId));
+                            //  NavigationPage(new Mainpage(resIdentify.data, deviceId));
                             //await Navigation.PushAsync(new PaymentView(result.data.PaymentUrl));
                             //this.Navigation.RemovePage(this);
                         }
