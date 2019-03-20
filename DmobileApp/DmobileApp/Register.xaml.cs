@@ -45,22 +45,23 @@ namespace DmobileApp
                     if(Device.RuntimePlatform == Device.Android)
                         DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");
 
-                    if (result.data.PERMIT == "BOTH")
-                    {
-                        Navigation.PushAsync(new Mainpage(result.data));
-                        Navigation.RemovePage(this);
-                    }
-                    else if(result.data.PERMIT == "SMS")
-                    {
-                        Navigation.PushAsync(new ChatSms(result.data));
-                        Navigation.RemovePage(this);
-                    }
-                    else if(result.data.PERMIT == "PAYMENT")
-                    {
-                        Navigation.PushAsync(new LoanPage(result.data));
-                        Navigation.RemovePage(this);
-                        
-                    }
+                    Navigation.PushAsync(new Mainpage(result.data, _deviceID));
+                    Navigation.RemovePage(this);
+                    //if (result.data.PERMIT == "BOTH")
+                    //{
+                    //    Navigation.PushAsync(new Mainpage(result.data));
+                    //    Navigation.RemovePage(this);
+                    //}
+                    //else if(result.data.PERMIT == "SMS")
+                    //{
+                    //    Navigation.PushAsync(new ChatSms(result.data));
+                    //    Navigation.RemovePage(this);
+                    //}
+                    //else if(result.data.PERMIT == "PAYMENT")
+                    //{
+                    //    Navigation.PushAsync(new LoanPage(result.data));
+                    //    Navigation.RemovePage(this);                       
+                    //}
                 }
                 else
                 {

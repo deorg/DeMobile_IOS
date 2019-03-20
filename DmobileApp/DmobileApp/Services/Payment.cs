@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using DmobileApp.Concret;
 using DmobileApp.Model;
 using Newtonsoft.Json;
 
 namespace DmobileApp.Services
 {
-    public static class Payment
+    public static class Payments
     {
         private static string Host = Constant.WebService.Production.Host;
 
@@ -32,6 +33,34 @@ namespace DmobileApp.Services
                 {
                     client.Dispose();
                     return null;
+                }
+            }
+        }
+        public static m_resOrder newOrder(m_newOrder value)
+        {
+            string registerUrl = Constant.WebService.Production.Api.Payment.newOrder;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string postBody = JsonConvert.SerializeObject(value);
+                    var content = new StringContent(postBody, Encoding.UTF8, "application/json");
+                    var response = client.PostAsync(registerUrl, content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseObj = JsonConvert.DeserializeObject<m_resOrder>(response.Content.ReadAsStringAsync().Result);
+                        return responseObj;
+                    }
+                    else
+                        return null;
+                }
+                finally
+                {
+                    client.Dispose();
                 }
             }
         }

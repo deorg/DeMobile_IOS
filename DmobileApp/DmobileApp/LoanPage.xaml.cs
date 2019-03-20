@@ -8,44 +8,34 @@ namespace DmobileApp
 {
     public partial class LoanPage : ContentPage
     {
-        public LoanPage(profile_data profile)
+        private profile_data _profile;
+        private string _deviceId;
+        public LoanPage(profile_data profile, string deviceId)
         {
             InitializeComponent();
             this.Title = profile.CUST_NAME;
-
+            _profile = profile;
+            _deviceId = deviceId;
             var loan = User.getContract(profile.CUST_NO);
             if(loan.code == 200)
             {
-                loan.data.Add(new contract_data
-                {
-                    con_no = loan.data[0].con_no,
-                    cust_no = loan.data[0].cust_no,
-                    tot_amt = loan.data[0].tot_amt,
-                    pay_amt = loan.data[0].pay_amt,
-                    period = loan.data[0].period,
-                    bal_amt = loan.data[0].bal_amt,
-                    con_date = loan.data[0].con_date,
-                    disc_amt = loan.data[0].disc_amt
-                });
-                loan.data.Add(new contract_data
-                {
-                    con_no = loan.data[0].con_no,
-                    cust_no = loan.data[0].cust_no,
-                    tot_amt = loan.data[0].tot_amt,
-                    pay_amt = loan.data[0].pay_amt,
-                    period = loan.data[0].period,
-                    bal_amt = loan.data[0].bal_amt,
-                    con_date = loan.data[0].con_date,
-                    disc_amt = loan.data[0].disc_amt
-                });
                 listContract.ItemsSource = loan.data;
             }
         }
-        private void OnSelected_contract(object sender, SelectedItemChangedEventArgs e)
+        //private void OnSelected_contract(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    var item = e.SelectedItem as contract_data;
+        //    Navigation.PushAsync(new Payment(item));
+        //    // DisplayAlert("Selection", $"You selected {item.con_no}", "OK");
+        //}
+
+        void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var item = e.SelectedItem as contract_data;
-            Navigation.PushAsync(new Payment(item));
-           // DisplayAlert("Selection", $"You selected {item.con_no}", "OK");
+            if (_profile.PERMIT == "BOTH" || _profile.PERMIT == "PAYMENT")
+            {
+                var item = e.Item as contract_data;
+                Navigation.PushAsync(new Payment(_profile, item, _deviceId));
+            }
         }
     }
 }

@@ -22,12 +22,14 @@ namespace DmobileApp
             {
                 if (resIdentify.code == 200)
                 {
-                    if (resIdentify.data.PERMIT == "SMS")
-                        MainPage = new NavigationPage(new ChatSms(resIdentify.data));
-                    else if (resIdentify.data.PERMIT == "PAYMENT")
-                        MainPage = new NavigationPage(new LoanPage(resIdentify.data));
-                    else
-                        MainPage = new NavigationPage(new Mainpage(resIdentify.data));
+                    MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId));
+                    //MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId) { Icon =  });
+                    //if (resIdentify.data.PERMIT == "SMS")
+                    //    MainPage = new NavigationPage(new ChatSms(resIdentify.data));
+                    //else if (resIdentify.data.PERMIT == "PAYMENT")
+                    //    MainPage = new NavigationPage(new LoanPage(resIdentify.data));
+                    //else
+                    //MainPage = new NavigationPage(new Mainpage(resIdentify.data));
                 }
                 else
                     MainPage = new NavigationPage(new Register(deviceId, simSerial));

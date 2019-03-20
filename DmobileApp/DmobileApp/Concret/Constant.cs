@@ -26,6 +26,7 @@ namespace DmobileApp.Concret
                     public static class Payment
                     {
                         public const string getBanks = "api/payment/getchannel";
+                        public const string newOrder = "api/payment/newpayment2";
                     }
                 }
             }

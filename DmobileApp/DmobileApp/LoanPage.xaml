@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DmobileApp.LoanPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
-            <ListView x:Name="listContract" RowHeight="200" Footer="" ItemSelected="OnSelected_contract">
+            <ListView x:Name="listContract" RowHeight="200" Footer="" ItemTapped="Handle_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

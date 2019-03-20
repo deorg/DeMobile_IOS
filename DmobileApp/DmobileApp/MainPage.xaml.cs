@@ -18,7 +18,7 @@ namespace DmobileApp
     {
         //private string Host = Constant.WebService.Production.Host;
         //private string Identify = Constant.WebService.Production.Api.User.identify;
-        public Mainpage(profile_data profile)
+        public Mainpage(profile_data profile, string deviceId)
         {
             InitializeComponent();
             this.Title = string.Empty;
@@ -30,7 +30,7 @@ namespace DmobileApp
             Children.Add(navigationPage);
             if (profile.PERMIT == "BOTH")
             {
-                navigationPage = new NavigationPage(new LoanPage(profile));
+                navigationPage = new NavigationPage(new LoanPage(profile, deviceId));
                 navigationPage.Title = "สัญญา";
                 // navigationPage.Icon = "assignment.png";
                 navigationPage.BarBackgroundColor = Color.White;
