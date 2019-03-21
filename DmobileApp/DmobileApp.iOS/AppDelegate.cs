@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using KeyboardOverlap.Forms.Plugin.iOSUnified;
 using UIKit;
 
 namespace DmobileApp.iOS
@@ -25,8 +26,10 @@ namespace DmobileApp.iOS
             global::Xamarin.Forms.Forms.Init();
             var device_id = UIDevice.CurrentDevice.IdentifierForVendor.ToString();
             InitThaiCalendarCrashFix();
-            LoadApplication(new App(device_id, "1111111111"));
+            var AppVersion = NSBundle.MainBundle.InfoDictionary[new NSString("CFBundleVersion")].ToString();
+            LoadApplication(new App(device_id, "1111111111", AppVersion));
 
+            //KeyboardOverlapRenderer.Init();
             return base.FinishedLaunching(app, options);
         }
         private static void InitThaiCalendarCrashFix()

@@ -20,13 +20,12 @@
             SeparatorVisibility="None"
             RelativeLayout.HeightConstraint="{ConstraintExpression 
             Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"
-            BackgroundColor="Transparent">
+            BackgroundColor="Transparent" > 
         </ListView>
         <!--</ScrollView>-->
         <StackLayout>
             <Grid x:Name="MessageControls" RowSpacing="1" ColumnSpacing="2" Padding="5,0" 
           BackgroundColor="Transparent" 
-
           VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">
           <!--RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=MessagesListView, Property=Height,Factor=.91,Constant=0}"-->

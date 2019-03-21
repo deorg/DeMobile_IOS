@@ -12,9 +12,9 @@ namespace DmobileApp.Services
     public static class User
     {
         private static string Host = Constant.WebService.Production.Host;
-        public static m_profile identify(string deviceId, string serialSim)
+        public static m_profile identify(string deviceId, string serialSim, string version)
         {
-            string IdentifyUrl = $"{Constant.WebService.Production.Api.User.identify}serial_sim={serialSim}&deviceId={deviceId}&app_version=1";
+            string IdentifyUrl = $"{Constant.WebService.Production.Api.User.identify}serial_sim={serialSim}&deviceId={deviceId}&app_version={version}";
             try
             {
                 using (var client = new HttpClient())

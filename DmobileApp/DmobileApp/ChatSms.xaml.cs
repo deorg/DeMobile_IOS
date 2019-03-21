@@ -32,12 +32,13 @@ namespace DmobileApp
         private void MyListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             MessagesListView.SelectedItem = null;
+            txtMessage.Unfocus();
         }
 
         private void MyListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             MessagesListView.SelectedItem = null;
-
+            txtMessage.Unfocus();
         }
         private void Send_Clicked(object sender, EventArgs e)
         {

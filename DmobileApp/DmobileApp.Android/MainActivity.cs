@@ -38,11 +38,11 @@ namespace DmobileApp.Droid
             {
                 var context = Application.Context;
                 deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
-
+                var info = context.PackageManager.GetPackageInfo(context.PackageName, 0);
                 //var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
                 //serialSim = tMgr.SimSerialNumber;
-               // ActionBar.SetIcon(Resource.Drawable.logo);
-                LoadApplication(new App(deviceId, "2222222222"));
+                // ActionBar.SetIcon(Resource.Drawable.logo);
+                LoadApplication(new App(deviceId, "2222222222", info.VersionName));
             }
             catch(System.Exception ex)
             {

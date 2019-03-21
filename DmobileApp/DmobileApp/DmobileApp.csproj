@@ -47,4 +47,7 @@
   <ItemGroup>
     <Folder Include="DataTemplates\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Interface\IAppVersionProvider.cs" />
+  </ItemGroup>
 </Project>

@@ -34,6 +34,21 @@ namespace DmobileApp
             btnBank5.Source = _banks.data[5].channel_img;
         }
 
+        void Handle_Focused(object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+            txtBanlance.Unfocus();
+        }
+
+        void Handle_Focused_1(object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+            txtDiscount.Unfocus();
+        }
+
+        void Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            txtPay.Text = txtPay.Text.Replace(".", "");
+        }
+
         void Period_Clicked(object sender, System.EventArgs e)
         {
             txtPay.Text = _contract.pay_amt.ToString();

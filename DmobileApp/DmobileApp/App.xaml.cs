@@ -13,11 +13,11 @@ namespace DmobileApp
     public partial class App : Application
     {
         
-        public App(string deviceId="", string simSerial="")
+        public App(string deviceId="", string simSerial="", string version = "1")
         {
             InitializeComponent();
             //MainPage = new NavigationPage(new ChatSms());
-            var resIdentify = User.identify(deviceId, simSerial);
+            var resIdentify = User.identify(deviceId, simSerial, version);
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)

@@ -26,11 +26,12 @@ namespace DmobileApp
         }
         void Handle_Navigating(object sender, Xamarin.Forms.WebNavigatingEventArgs e)
         {
-            Title = "Loading.......";
+            Title = "Loading.....";
         }
 
         void Handle_Navigated(object sender, Xamarin.Forms.WebNavigatedEventArgs e)
         {
+            Title = string.Empty;
             progress.IsVisible = false;
             Debug.WriteLine("Web display ===========> " + e.Url);
             if (e.Url == "http://35.197.153.92/Success/Redirect")
