@@ -14,6 +14,7 @@ namespace DmobileApp.Services
         private static string Host = Constant.WebService.Production.Host;
         public static m_profile identify(string deviceId, string serialSim, string version)
         {
+            //var ver = double.Parse(version);
             string IdentifyUrl = $"{Constant.WebService.Production.Api.User.identify}serial_sim={serialSim}&deviceId={deviceId}&app_version={version}";
             try
             {

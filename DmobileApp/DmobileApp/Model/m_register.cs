@@ -12,5 +12,6 @@ namespace DmobileApp.Model
         public string serial_sim { get; set; }
         public string pin { get; set; }
         public string platform { get; set; }
+        public double app_version { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace DmobileApp
                     //MainPage = new NavigationPage(new Mainpage(resIdentify.data));
                 }
                 else
-                    MainPage = new NavigationPage(new Register(deviceId, simSerial));
+                    MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
             }
             else
             {

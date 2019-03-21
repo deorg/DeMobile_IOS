@@ -14,19 +14,23 @@ namespace DmobileApp
     public partial class Register : ContentPage
     {
         private string _deviceID, _simSerial;
-        public Register(string deviceId, string simSerial)
+        private string _version;
+        public Register(string deviceId, string simSerial, string version)
         {
             InitializeComponent();
             _deviceID = deviceId;
             _simSerial = simSerial;
+            _version = version;
         }
         private void btnRegister_Clicked(object sender, EventArgs e)
         {
+            var version = double.Parse(_version);
             m_register data = new m_register();
             data.citizen_no = txtCitizen.Text;
             data.phone_no = txtPhone.Text;
             data.pin = txtPin.Text;
             data.device_id = _deviceID;
+            data.app_version = version;
             if(Device.RuntimePlatform == Device.iOS)
             {
                 data.serial_sim = "1111111111";
