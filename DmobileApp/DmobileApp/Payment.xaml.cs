@@ -30,8 +30,8 @@ namespace DmobileApp
             btnBank1.Source = _banks.data[1].channel_img;
             btnBank2.Source = _banks.data[2].channel_img;
             btnBank3.Source = _banks.data[3].channel_img;
-            btnBank4.Source = _banks.data[4].channel_img;
-            btnBank5.Source = _banks.data[5].channel_img;
+            //btnBank4.Source = _banks.data[4].channel_img;
+            //btnBank5.Source = _banks.data[5].channel_img;
         }
 
         void Handle_Focused(object sender, Xamarin.Forms.FocusEventArgs e)
@@ -65,7 +65,7 @@ namespace DmobileApp
             var item = sender as ImageButton;
             var pay = double.Parse(txtPay.Text);
             if (pay > _contract.bal_amt - _contract.disc_amt)
-                await DisplayAlert("ยืนยันการชำระเงิน", "ไม่สามารถชำระเงินได้ เนื่องจากจำนวนที่ต้องการชำระเกินจำนวนยอดคงเหลือหลังจากหักส่วนลดแล้ว!", "ตกลง");
+                await DisplayAlert("ยืนยันการชำระเงิน", "ไม่สามารถชำระเงินได้ เนื่องจากจำนวนเงินที่ต้องการชำระเกินจำนวนยอดคงเหลือหลังจากหักส่วนลดแล้ว!", "ตกลง");
             else
             {
                 var payTransaction = pay.ToString("0.00");

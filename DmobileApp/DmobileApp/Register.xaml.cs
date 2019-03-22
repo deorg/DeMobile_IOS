@@ -69,14 +69,16 @@ namespace DmobileApp
                 }
                 else
                 {
-                    if(Device.RuntimePlatform == Device.Android)
-                        DependencyService.Get<IMessage>().longAlert(result.message);
+                    DisplayAlert("ไม่สามารถลงทะเบียนได้", result.message, "ตกลง");
+                    //if(Device.RuntimePlatform == Device.Android)
+                    //DependencyService.Get<IMessage>().longAlert(result.message);
                 }
             }
             else
             {
-                if(Device.RuntimePlatform == Device.Android)
-                    DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
+                DisplayAlert("ไม่สามารถลงทะเบียนได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลงทะเบียนใหม่ในภายหลัง", "ตกลง");
+                //if(Device.RuntimePlatform == Device.Android)
+                    //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
             }
         }
     }

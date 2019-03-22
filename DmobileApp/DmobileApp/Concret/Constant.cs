@@ -32,7 +32,7 @@ namespace DmobileApp.Concret
             }
             public static class Development
             {
-                public const string Host = "http://localhost:58465";
+                public const string Host = "http://localhost:8080";
                 public const string Port = "80";
                 public static class User
                 {

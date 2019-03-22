@@ -36,7 +36,8 @@ namespace DmobileApp
             }
             else
             {
-                DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์");
+                MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
+                //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง");
             }
 
             //MainPage = new NavigationPage(new ListSms(119954));
