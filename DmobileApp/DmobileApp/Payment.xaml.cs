@@ -21,17 +21,17 @@ namespace DmobileApp
             _profile = profile;
             _deviceId = deviceId;
             Title = "สัญญา " + contract.con_no;
-            txtBanlance.Text = contract.bal_amt.ToString();
-            txtPay.Text = contract.pay_amt.ToString();
-            txtDiscount.Text = contract.disc_amt.ToString();
+            txtBanlance.Text = String.Format("{0:#,##0}", contract.bal_amt);//contract.bal_amt.ToString();
+            txtPay.Text = String.Format("{0:#,##0}", contract.pay_amt);//contract.pay_amt.ToString();
+            txtDiscount.Text = String.Format("{0:#,##0}", contract.disc_amt);//contract.disc_amt.ToString();
             _banks = Payments.getBanks();
             //img0.Source = _banks.data[0].channel_img;
             btnBank0.Source = _banks.data[0].channel_img;
             btnBank1.Source = _banks.data[1].channel_img;
             btnBank2.Source = _banks.data[2].channel_img;
             btnBank3.Source = _banks.data[3].channel_img;
-            //btnBank4.Source = _banks.data[4].channel_img;
-            //btnBank5.Source = _banks.data[5].channel_img;
+            btnBank4.Source = _banks.data[4].channel_img;
+            btnBank5.Source = _banks.data[5].channel_img;
         }
 
         void Handle_Focused(object sender, Xamarin.Forms.FocusEventArgs e)
@@ -68,43 +68,51 @@ namespace DmobileApp
                 await DisplayAlert("ยืนยันการชำระเงิน", "ไม่สามารถชำระเงินได้ เนื่องจากจำนวนเงินที่ต้องการชำระเกินจำนวนยอดคงเหลือหลังจากหักส่วนลดแล้ว!", "ตกลง");
             else
             {
+                
                 var payTransaction = pay.ToString("0.00");
                 var index2 = item.StyleId.Replace("btnBank", "");
                 var index = Int32.Parse(index2);
                 var bank = _banks.data[index];
-                var answer = await DisplayAlert("ยืนยันการชำระเงิน", $"คุณต้องการชำระเงินจำนวน {pay} บาท ผ่านธนาคาร {bank.channel_name} ใช่หรือไม่", "ตกลง", "ยกเลิก");
-                if (answer)
+                if (bank.channel_id != "internetbank_scb" && bank.channel_id != "payplus_kbank")
                 {
-                    payTransaction = payTransaction.Replace(".", "");
-                    var payOrder = Int32.Parse(payTransaction);
-                    var order = new m_newOrder
+                    var answer = await DisplayAlert("ยืนยันการชำระเงิน", $"คุณต้องการชำระเงินจำนวน {pay} บาท ผ่านธนาคาร {bank.channel_name} ใช่หรือไม่", "ตกลง", "ยกเลิก");
+                    if (answer)
                     {
-                        CustomerId = _profile.CUST_NO,
-                        ContractNo = _contract.con_no,
-                        DeviceId = _deviceId,
-                        Amount = payOrder,
-                        PhoneNumber = _profile.TEL,
-                        Description = "Test API",
-                        ChannelCode = bank.channel_id
-                    };
-                    var result = Payments.newOrder(order);
-                    if(result.code == 200)
-                    {
-                        if (result.data.Code == 200)
+                        payTransaction = payTransaction.Replace(".", "");
+                        var payOrder = Int32.Parse(payTransaction);
+                        var order = new m_newOrder
                         {
-                            Application.Current.MainPage = new NavigationPage(new PaymentView(result.data.PaymentUrl, _profile, _deviceId));
-                            //  NavigationPage(new Mainpage(resIdentify.data, deviceId));
-                            //await Navigation.PushAsync(new PaymentView(result.data.PaymentUrl));
-                            //this.Navigation.RemovePage(this);
+                            CustomerId = _profile.CUST_NO,
+                            ContractNo = _contract.con_no,
+                            DeviceId = _deviceId,
+                            Amount = payOrder,
+                            PhoneNumber = _profile.TEL,
+                            Description = "Test API",
+                            ChannelCode = bank.channel_id
+                        };
+                        var result = Payments.newOrder(order);
+                        if(result.code == 200)
+                        {
+                            if (result.data.Code == 200)
+                            {
+                                Application.Current.MainPage = new NavigationPage(new PaymentView(result.data.PaymentUrl, _profile, _deviceId));
+                                //  NavigationPage(new Mainpage(resIdentify.data, deviceId));
+                                //await Navigation.PushAsync(new PaymentView(result.data.PaymentUrl));
+                                //this.Navigation.RemovePage(this);
+                            }
+                            else
+                                await DisplayAlert("ไม่สามารถทำรายการชำระได้", result.data.Message, "ตกลง");
                         }
                         else
-                            await DisplayAlert("ไม่สามารถทำรายการชำระได้", result.data.Message, "ตกลง");
-                    }
-                    else
-                    {
+                        {
 
-                        await DisplayAlert("สามารถทำรายการชำระได้", result.message, "ตกลง");
+                            await DisplayAlert("สามารถทำรายการชำระได้", result.message, "ตกลง");
+                        }
                     }
+                }
+                else
+                {
+                    await DisplayAlert("ไม่สามารถทำรายการชำระได้", $"บริการชำระเงินผ่านธนาคาร {bank.channel_name} ปิดชั่วคราว", "ตกลง");
                 }
             }
         }

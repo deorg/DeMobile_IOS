@@ -27,11 +27,11 @@
                                 <Label Grid.Column="0" Grid.Row="5" Text="ส่วนลด" FontSize="18"/>
                                 
                              
-                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding tot_amt}" FontSize="18" HorizontalOptions="End"/>
-                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding pay_amt}" FontSize="18" HorizontalOptions="End"/>
-                                <Label Grid.Column="1" Grid.Row="3" Text="{Binding period}" FontSize="18" HorizontalOptions="End"/>
-                                <Label Grid.Column="1" Grid.Row="4" Text="{Binding bal_amt}" FontSize="18" HorizontalOptions="End"/>
-                                <Label Grid.Column="1" Grid.Row="5" Text="{Binding disc_amt}" FontSize="18" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding tot_amt, StringFormat='{0:#,##0}'}" FontSize="18" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding pay_amt, StringFormat='{0:#,##0}'}" FontSize="18" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="3" Text="{Binding period, StringFormat='{0:#,##0}'}" FontSize="18" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="4" Text="{Binding bal_amt, StringFormat='{0:#,##0}'}" FontSize="18" HorizontalOptions="End"/>
+                                <Label Grid.Column="1" Grid.Row="5" Text="{Binding disc_amt, StringFormat='{0:#,##0}'}" FontSize="18" HorizontalOptions="End"/>
                             </Grid>
 
                             <!--<StackLayout Orientation="Vertical" Padding="8,0,8,0">

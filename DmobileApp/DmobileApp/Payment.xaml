@@ -67,10 +67,10 @@
                     </ImageButton>
                     <ImageButton x:Name="btnBank3" Grid.Column="3" Grid.Row="1" HorizontalOptions="Center" BackgroundColor="Transparent" FlexLayout.AlignSelf="Center" FlexLayout.Grow="1" Aspect="AspectFit" Clicked="PayBank_ClickedAsync">                 
                     </ImageButton>
-                    <!--<ImageButton x:Name="btnBank4" Grid.Column="0" Grid.Row="2" HorizontalOptions="Center" BackgroundColor="Transparent" Aspect="AspectFit" Clicked="PayBank_ClickedAsync">                     
+                    <ImageButton x:Name="btnBank4" Grid.Column="0" Grid.Row="2" HorizontalOptions="Center" BackgroundColor="Transparent" Aspect="AspectFit" Clicked="PayBank_ClickedAsync">                     
                     </ImageButton>
                     <ImageButton x:Name="btnBank5" Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" BackgroundColor="Transparent" FlexLayout.AlignSelf="Center" FlexLayout.Grow="1" Aspect="AspectFit" Clicked="PayBank_ClickedAsync">                        
-                    </ImageButton>-->
+                    </ImageButton>
                 </Grid>        
             </StackLayout>
         </ScrollView>
