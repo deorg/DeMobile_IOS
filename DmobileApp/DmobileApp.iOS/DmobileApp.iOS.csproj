@@ -131,7 +131,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80x80-1.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76x76.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152x152.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024x1024.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
