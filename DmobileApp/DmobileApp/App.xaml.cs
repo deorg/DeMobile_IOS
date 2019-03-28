@@ -12,12 +12,18 @@ namespace DmobileApp
 {
     public partial class App : Application
     {
-        
+        private m_profile resIdentify;
+        private string _deviceId = "";
+        private string _simSerial = "";
+        private string _version = "1";
         public App(string deviceId="", string simSerial="", string version = "1")
         {
             InitializeComponent();
-            //MainPage = new NavigationPage(new ChatSms());
-            var resIdentify = User.identify(deviceId, simSerial, version);
+            _deviceId = deviceId;
+            _simSerial = simSerial;
+            _version = version;
+            resIdentify = User.identify(deviceId, simSerial, version);
+            MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)
@@ -31,12 +37,12 @@ namespace DmobileApp
                     //else
                     //MainPage = new NavigationPage(new Mainpage(resIdentify.data));
                 }
-                else
-                    MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
+                //else
+                    //MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
             }
             else
             {
-                MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
+                //MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
                 //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง");
             }
 
@@ -55,8 +61,11 @@ namespace DmobileApp
         protected override void OnStart()
         {
             // Handle when your app starts
+            if (resIdentify == null)
+            {
+                MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "ไม่สามารถเชื่อมต่อบริการได้ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
+            }
         }
-
         protected override void OnSleep()
         {
             // Handle when your app sleeps

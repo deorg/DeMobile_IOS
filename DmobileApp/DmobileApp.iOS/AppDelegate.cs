@@ -26,7 +26,8 @@ namespace DmobileApp.iOS
             global::Xamarin.Forms.Forms.Init();
             var device_id = UIDevice.CurrentDevice.IdentifierForVendor.ToString();
             InitThaiCalendarCrashFix();
-            var AppVersion = NSBundle.MainBundle.InfoDictionary[new NSString("CFBundleVersion")].ToString();
+            var AppVersion = NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleShortVersionString").ToString();
+            //var AppBuilNumber = NSBundle.MainBundle.InfoDictionary[new NSString("CFBundleVersion")].ToString();
             LoadApplication(new App(device_id, "1111111111", AppVersion));
 
             //KeyboardOverlapRenderer.Init();

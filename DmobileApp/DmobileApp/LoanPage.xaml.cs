@@ -19,6 +19,7 @@ namespace DmobileApp
             var loan = User.getContract(profile.CUST_NO);
             if(loan.code == 200)
             {
+                //listContract.ItemsSource = null;
                 listContract.ItemsSource = loan.data;
             }
         }
@@ -44,6 +45,7 @@ namespace DmobileApp
 
                 //Application.Current.MainPage = new NavigationPage(navigationPage);
             }
+            if (sender is ListView lv) lv.SelectedItem = null;
         }
     }
 }

@@ -30,7 +30,7 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <CodesignProvision>iOS Team Provisioning Profile: com.Domestic.DmobileApp</CodesignProvision>
-    <CodesignKey>iPhone Developer: ch.pacharapon_st@tni.ac.th (Y96654WPC3)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
