@@ -16,12 +16,12 @@ namespace DmobileApp
             this.Title = profile.CUST_NAME;
             _profile = profile;
             _deviceId = deviceId;
-            var loan = User.getContract(profile.CUST_NO);
-            if(loan.code == 200)
-            {
-                //listContract.ItemsSource = null;
-                listContract.ItemsSource = loan.data;
-            }
+            //var loan = User.getContract(profile.CUST_NO);
+            //if(loan.code == 200)
+            //{
+            //    //listContract.ItemsSource = null;
+            //    listContract.ItemsSource = loan.data;
+            //}
         }
         //private void OnSelected_contract(object sender, SelectedItemChangedEventArgs e)
         //{
@@ -29,7 +29,16 @@ namespace DmobileApp
         //    Navigation.PushAsync(new Payment(item));
         //    // DisplayAlert("Selection", $"You selected {item.con_no}", "OK");
         //}
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var loan = User.getContract(_profile.CUST_NO);
+            if (loan.code == 200)
+            {
+                //listContract.ItemsSource = null;
+                listContract.ItemsSource = loan.data;
+            }
+        }
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (_profile.PERMIT == "BOTH" || _profile.PERMIT == "PAYMENT")

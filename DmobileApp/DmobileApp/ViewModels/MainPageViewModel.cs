@@ -39,8 +39,8 @@ namespace DmobileApp.ViewModels
                     var items = Services.User.getSms(cust_no);
                     if (items.code == 200)
                     {
-                        if (Device.RuntimePlatform == Device.Android)
-                            DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+                        //if (Device.RuntimePlatform == Device.Android)
+                            //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
                         if (items.data.Count != 0)
                         {
                             foreach (var msg in items.data)

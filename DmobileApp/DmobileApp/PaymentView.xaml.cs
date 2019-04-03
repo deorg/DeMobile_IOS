@@ -18,11 +18,11 @@ namespace DmobileApp
             _deviceId = deviceId;
             bankView.Source = url;
         }
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            await progress.ProgressTo(0.9, 900, Easing.SpringIn);
+            progress.ProgressTo(0.9, 900, Easing.SpringIn);
         }
         void Handle_Navigating(object sender, Xamarin.Forms.WebNavigatingEventArgs e)
         {

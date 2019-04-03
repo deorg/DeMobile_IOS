@@ -21,13 +21,21 @@ namespace DmobileApp
 			InitializeComponent ();
             Title = profile.CUST_NAME;
             _cust_no = profile.CUST_NO;
-            BindingContext = new MainPageViewModel(profile.CUST_NO);
-            //scrollList.ScrollToAsync(MessageControls, ScrollToPosition.End, true);
-            var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
-            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            //BindingContext = new MainPageViewModel(profile.CUST_NO);
+            ////scrollList.ScrollToAsync(MessageControls, ScrollToPosition.End, true);
+            //var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+            //MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
 
            // MessagesListView.ScrollTo(MessagesListView.ItemsSource.Cast<Grid>().Count(), ScrollToPosition.End, true);
             //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = new MainPageViewModel(_cust_no);
+            //scrollList.ScrollToAsync(MessageControls, ScrollToPosition.End, true);
+            var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
         }
         private void MyListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

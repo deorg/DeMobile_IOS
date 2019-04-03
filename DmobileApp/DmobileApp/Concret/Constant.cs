@@ -22,6 +22,7 @@ namespace DmobileApp.Concret
                         public const string sendSms = "api/customer/sendmessage";
                         public const string getProfile = "api/customer/profile?id=";
                         public const string getContract = "api/customer/contract?id=";
+                        public const string logout = "api/authen/logout?cust_no=";
                     }
                     public static class Payment
                     {

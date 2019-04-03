@@ -109,9 +109,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\logo.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\logo.imageset\logo.png" />
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
@@ -131,6 +128,9 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80x80-1.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76x76.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152x152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167x167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024x1024 copy.png" />
+    <ImageAsset Include="Assets.xcassets\Image.imageset\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -157,5 +157,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\background5.jpg" />
+    <BundleResource Include="Resources\exit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\assignment.png" />
+    <AndroidResource Include="Resources\message.png" />
+    <AndroidResource Include="Resources\exit.png" />
   </ItemGroup>
 </Project>

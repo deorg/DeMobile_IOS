@@ -12,6 +12,37 @@ namespace DmobileApp.Services
     public static class User
     {
         private static string Host = Constant.WebService.Production.Host;
+
+        public static void logout(int cust_no)
+        {
+            string logoutUrl = $"{Constant.WebService.Production.Api.User.logout}{cust_no}";
+            try
+            {
+                using(var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = client.GetAsync(logoutUrl).Result;
+                    var content = response.Content.ReadAsStringAsync().Result;
+                    //var profile = JsonConvert.DeserializeObject<m_profile>(content);
+                    //if (response.IsSuccessStatusCode)
+                    //{
+                    //    client.Dispose();
+                    //    return profile;
+                    //}
+                    //else
+                    //{
+                    //    client.Dispose();
+                    //    return null;
+                    //}
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public static m_profile identify(string deviceId, string serialSim, string version)
         {
             //var ver = double.Parse(version);

@@ -28,15 +28,21 @@ namespace DmobileApp
             navigationPage.BarTextColor = Color.Teal;
             //navigationPage.Icon = "message.png";
             Children.Add(navigationPage);
-            //if (profile.PERMIT == "BOTH")
-            //{
-                navigationPage = new NavigationPage(new LoanPage(profile, deviceId));
-                navigationPage.Title = "สัญญา";
-                // navigationPage.Icon = "assignment.png";
+            navigationPage = new NavigationPage(new LoanPage(profile, deviceId));
+            navigationPage.Title = "สัญญา";
+            //navigationPage.Icon = "assignment.png";
+            navigationPage.BarBackgroundColor = Color.White;
+            navigationPage.BarTextColor = Color.Teal;
+            Children.Add(navigationPage);
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                navigationPage = new NavigationPage(new ExitPage(profile, deviceId));
+                navigationPage.Title = "Logout";
+               // navigationPage.Icon = "exit2.png";
                 navigationPage.BarBackgroundColor = Color.White;
                 navigationPage.BarTextColor = Color.Teal;
                 Children.Add(navigationPage);
-            //}
+            }
         }
         //private async Task<bool> identifyAsync()
         //{
@@ -53,5 +59,6 @@ namespace DmobileApp
         //    else
         //        return false;
         //}
+
     }
 }

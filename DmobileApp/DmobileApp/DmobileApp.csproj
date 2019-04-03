@@ -46,8 +46,12 @@
 
   <ItemGroup>
     <Folder Include="DataTemplates\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Interface\IAppVersionProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ExitPage.xml" />
   </ItemGroup>
 </Project>

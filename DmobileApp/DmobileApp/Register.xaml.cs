@@ -15,7 +15,7 @@ namespace DmobileApp
     {
         private string _deviceID, _simSerial;
         private string _version;
-        public Register(string deviceId, string simSerial, string version)
+        public Register(string deviceId = "", string simSerial = "", string version = "1")
         {
             InitializeComponent();
             _deviceID = deviceId;
@@ -26,9 +26,9 @@ namespace DmobileApp
         {
             var version = double.Parse(_version);
             m_register data = new m_register();
-            data.citizen_no = txtCitizen.Text;
+            //data.citizen_no = txtCitizen.Text;
             data.phone_no = txtPhone.Text;
-            data.pin = txtPin.Text;
+            //data.pin = txtPin.Text;
             data.device_id = _deviceID;
             data.app_version = version;
             if(Device.RuntimePlatform == Device.iOS)
