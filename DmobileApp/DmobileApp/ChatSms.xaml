@@ -23,25 +23,26 @@
             BackgroundColor="Transparent" > 
         </ListView>
         <!--</ScrollView>-->
-        <StackLayout>
-            <Grid x:Name="MessageControls" RowSpacing="1" ColumnSpacing="2" Padding="5,0" 
-          BackgroundColor="Transparent" 
-          VerticalOptions="FillAndExpand"
-          HorizontalOptions="FillAndExpand">
+<!--        <StackLayout>-->
+<!--            <Grid x:Name="MessageControls" RowSpacing="1" ColumnSpacing="2" Padding="5,0" -->
+<!--          BackgroundColor="Transparent" -->
+<!--          VerticalOptions="FillAndExpand"-->
+<!--          HorizontalOptions="FillAndExpand">-->
+<!--                พวก relativelayout ปิดถาวร-->
           <!--RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=MessagesListView, Property=Height,Factor=.91,Constant=0}"-->
          <!-- RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"-->
          <!-- RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=MessagesListView, Property=Height,Factor=.09,Constant=0}">-->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Entry x:Name="txtMessage" Grid.Column="0" FontSize="18" Placeholder="ข้อความ" Text="{Binding OutGoingText}" Keyboard="Chat"></Entry>
-                <Button Grid.Column="1" Text="ส่ง" Command="{Binding SendCommand}" Clicked="Send_Clicked" FontSize="18"></Button>
-            </Grid>
-        </StackLayout>
+<!--                <Grid.ColumnDefinitions>-->
+<!--                    <ColumnDefinition Width="*"></ColumnDefinition>-->
+<!--                    <ColumnDefinition Width="Auto"></ColumnDefinition>-->
+<!--                </Grid.ColumnDefinitions>-->
+<!--                <Grid.RowDefinitions>-->
+<!--                    <RowDefinition Height="Auto"></RowDefinition>-->
+<!--                </Grid.RowDefinitions>-->
+<!--                <Entry x:Name="txtMessage" Grid.Column="0" FontSize="18" Placeholder="ข้อความ" Text="{Binding OutGoingText}" Keyboard="Chat"></Entry>-->
+<!--                <Button Grid.Column="1" Text="ส่ง" Command="{Binding SendCommand}" Clicked="Send_Clicked" FontSize="18"></Button>-->
+<!--            </Grid>-->
+<!--        </StackLayout>-->
     </StackLayout>
     
 </ContentPage>

@@ -13,6 +13,37 @@ namespace DmobileApp.Services
     {
         private static string Host = Constant.WebService.Production.Host;
 
+        public static m_custPhone preIdentify(string phone)
+        {
+            string checkPhoneUrl = $"{Constant.WebService.Production.Api.User.checkPhone}{phone}";
+            try
+            {
+                using(var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = client.GetAsync(checkPhoneUrl).Result;
+                    var content = response.Content.ReadAsStringAsync().Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var customers = JsonConvert.DeserializeObject<m_custPhone>(content);
+                        client.Dispose();
+                        return customers;
+                    }
+                    else
+                    {
+                        client.Dispose();
+                        return null;
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public static void logout(int cust_no)
         {
             string logoutUrl = $"{Constant.WebService.Production.Api.User.logout}{cust_no}";

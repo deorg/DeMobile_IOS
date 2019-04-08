@@ -13,19 +13,19 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>-->
-            <Grid Margin="50,0,50,0" RowSpacing="15" VerticalOptions="CenterAndExpand">
+            <Grid Margin="50,0,50,0" RowSpacing="5" VerticalOptions="Start">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Image Source="logo.png" HeightRequest="200" WidthRequest="100"/>               
+                <Image Source="logo.png" HeightRequest="150" WidthRequest="100"/>               
 <!--                <Entry x:Name="txtCitizen" Grid.Row="1" Placeholder="เลขประจำตัวประชาชน" PlaceholderColor="#d1cccc" FontSize="24" Keyboard="Numeric" FontAttributes="Bold"/>-->
                 <Entry x:Name="txtPhone" HorizontalTextAlignment="Center" Grid.Row="2" Placeholder="หมายเลขโทรศัพท์" PlaceholderColor="#d1cccc" FontSize="32" Keyboard="Telephone" FontAttributes="Bold"/>
 <!--                <Entry x:Name="txtPin" Grid.Row="3" Placeholder="หมายเลข PIN" PlaceholderColor="#d1cccc" FontSize="24" Keyboard="Numeric" FontAttributes="Bold"/>-->
                 <!--<Button Text="ลงทะเบียน" BackgroundColor="#385992" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4" Clicked="btnRegister_Clicked"/>-->
-                <Button Text="ลงทะเบียน" BackgroundColor="#036315" TextColor="White" HeightRequest="60" FontSize="32" Grid.Row="3" Clicked="btnRegister_Clicked"/>
+                <Button x:Name="btnRegister" Text="ลงทะเบียน" BackgroundColor="#036315" TextColor="White" HeightRequest="60" FontSize="32" Grid.Row="3" Clicked="btnRegister_Clicked"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

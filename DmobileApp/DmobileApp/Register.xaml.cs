@@ -1,10 +1,11 @@
 ﻿using DmobileApp.Model;
+using DmobileApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,15 +14,60 @@ namespace DmobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Register : ContentPage
     {
-        private string _deviceID, _simSerial;
-        private string _version;
-        public Register(string deviceId = "", string simSerial = "", string version = "1")
+        private string _deviceID, _simSerial, _version, _phone_no;
+        public Register(string deviceId = "", string simSerial = "", string version = "1", string phone_no = "")
         {
             InitializeComponent();
             _deviceID = deviceId;
             _simSerial = simSerial;
             _version = version;
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                if (!string.IsNullOrEmpty(phone_no))
+                {
+                    try
+                    {
+                        _phone_no = phone_no.Replace("+66", "0");
+                        txtPhone.Text = phone_no.Replace("+66", "0");
+                        DependencyService.Get<IMessage>().longAlert("ตรวจพบหมายเลขโทรศัพท์บนเครื่อง");
+                        //var sendClick = btnRegister as IButtonController;
+                        //sendClick.SendClicked();
+                    }
+                    catch
+                    {
+                        _phone_no = phone_no.Replace("+66", "0");
+                        txtPhone.Text = phone_no.Replace("+66", "0");
+                    }
+                }
+            }
         }
+        //protected override async void OnAppearing()
+        //{
+        //    if (!string.IsNullOrEmpty(_phone_no))
+        //    {
+        //        var resCheckPhone = User.preIdentify(_phone_no);
+        //        if (resCheckPhone != null)
+        //        {
+        //            if (resCheckPhone.code == 200)
+        //            {
+        //                if (resCheckPhone.data.Count == 1)
+        //                {
+        //                    var answer = await DisplayAlert("ยืนยันตัวตน", $"คุณต้องการเข้าใช้งานด้วยชื่อ {resCheckPhone.data[0].CUST_NAME} ใช่หรือไม่", "ใช่", "ไม่ใช่");
+        //                    if (answer)
+        //                    {
+        //                        Console.WriteLine("answer");
+        //                    }
+        //                    else
+        //                    {
+        //                        Console.WriteLine("not answer");
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    base.OnAppearing();
+        //    //MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+        //}
         private void btnRegister_Clicked(object sender, EventArgs e)
         {
             var version = double.Parse(_version);
@@ -41,6 +87,9 @@ namespace DmobileApp
                 data.serial_sim = "2222222222";
                 data.platform = "ANDROID";
             }
+            data.brand = DeviceInfo.Manufacturer;
+            data.model = DeviceInfo.Model;
+            data.api_version = DeviceInfo.VersionString;
             var result = Services.User.register(data);
             if(result != null)
             {
@@ -48,9 +97,11 @@ namespace DmobileApp
                 {
                     if(Device.RuntimePlatform == Device.Android)
                         DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");
+                       
 
-                    Navigation.PushAsync(new Mainpage(result.data, _deviceID));
+                    Navigation.PushAsync(new Mainpage(result.data, _deviceID, _simSerial, _version));
                     Navigation.RemovePage(this);
+
                     //if (result.data.PERMIT == "BOTH")
                     //{
                     //    Navigation.PushAsync(new Mainpage(result.data));
@@ -77,6 +128,7 @@ namespace DmobileApp
             else
             {
                 DisplayAlert("ไม่สามารถลงทะเบียนได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลงทะเบียนใหม่ในภายหลัง", "ตกลง");
+                txtPhone.Text = "";
                 //if(Device.RuntimePlatform == Device.Android)
                     //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
             }

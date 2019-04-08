@@ -49,7 +49,8 @@ namespace DmobileApp.ViewModels
                                 {
                                     Text = msg.sms_note,
                                     IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
-                                    MessageDateTime = DateTime.Now
+                                    //MessageDateTime = DateTime.Now
+                                    MessageDateTime = msg.sms_time
                                 });
                             }
                         }

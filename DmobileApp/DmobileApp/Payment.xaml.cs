@@ -12,14 +12,16 @@ namespace DmobileApp
         private contract_data _contract;
         private profile_data _profile;
         private m_banks _banks;
-        private string _deviceId;
-        public Payment(profile_data profile, contract_data contract, string deviceId)
+        private string _deviceId, _serialSim, _version;
+        public Payment(profile_data profile, contract_data contract, string deviceId, string serialSim, string version)
         {
             InitializeComponent();
             //BindingContext = contract;
             _contract = contract;
             _profile = profile;
             _deviceId = deviceId;
+            _serialSim = serialSim;
+            _version = version;
             Title = "สัญญา " + contract.con_no;
             txtBanlance.Text = String.Format("{0:#,##0}", contract.bal_amt);//contract.bal_amt.ToString();
             txtPay.Text = String.Format("{0:#,##0}", contract.pay_amt);//contract.pay_amt.ToString();
@@ -95,7 +97,7 @@ namespace DmobileApp
                         {
                             if (result.data.Code == 200)
                             {
-                                Application.Current.MainPage = new NavigationPage(new PaymentView(result.data.PaymentUrl, _profile, _deviceId));
+                                Application.Current.MainPage = new NavigationPage(new PaymentView(result.data.PaymentUrl, _profile, _deviceId, _serialSim, _version));
                                 //  NavigationPage(new Mainpage(resIdentify.data, deviceId));
                                 //await Navigation.PushAsync(new PaymentView(result.data.PaymentUrl));
                                 //this.Navigation.RemovePage(this);

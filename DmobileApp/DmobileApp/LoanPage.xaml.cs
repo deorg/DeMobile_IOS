@@ -9,19 +9,21 @@ namespace DmobileApp
     public partial class LoanPage : ContentPage
     {
         private profile_data _profile;
-        private string _deviceId;
-        public LoanPage(profile_data profile, string deviceId)
+        private string _deviceId, _serialSim, _version;
+        public LoanPage(profile_data profile, string deviceId, string serialSim, string version)
         {
             InitializeComponent();
             this.Title = profile.CUST_NAME;
             _profile = profile;
             _deviceId = deviceId;
-            //var loan = User.getContract(profile.CUST_NO);
-            //if(loan.code == 200)
-            //{
-            //    //listContract.ItemsSource = null;
-            //    listContract.ItemsSource = loan.data;
-            //}
+            _serialSim = serialSim;
+            _version = version;
+            var loan = User.getContract(profile.CUST_NO);
+            if(loan.code == 200)
+            {
+                //listContract.ItemsSource = null;
+                listContract.ItemsSource = loan.data;
+            }
         }
         //private void OnSelected_contract(object sender, SelectedItemChangedEventArgs e)
         //{
@@ -31,13 +33,18 @@ namespace DmobileApp
         //}
         protected override void OnAppearing()
         {
+            MessagingCenter.Subscribe<App>(this, "refreshContract", app => {
+                var contract = User.getContract(_profile.CUST_NO);
+                if (contract.code == 200)
+                    listContract.ItemsSource = contract.data;
+            });
             base.OnAppearing();
-            var loan = User.getContract(_profile.CUST_NO);
-            if (loan.code == 200)
-            {
-                //listContract.ItemsSource = null;
-                listContract.ItemsSource = loan.data;
-            }
+            //base.OnAppearing();
+            //var loan = User.getContract(_profile.CUST_NO);
+            //if (loan.code == 200)
+            //{
+            //    listContract.ItemsSource = loan.data;
+            //}
         }
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
@@ -50,7 +57,7 @@ namespace DmobileApp
                 //navigationPage.BarTextColor = Color.Teal;
                 //Navigation.PushAsync(navigationPage);
                
-                Navigation.PushAsync(new Payment(_profile, item, _deviceId));
+                Navigation.PushAsync(new Payment(_profile, item, _deviceId, _serialSim, _version));
 
                 //Application.Current.MainPage = new NavigationPage(navigationPage);
             }

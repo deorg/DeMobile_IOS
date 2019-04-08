@@ -18,7 +18,7 @@ namespace DmobileApp
     {
         //private string Host = Constant.WebService.Production.Host;
         //private string Identify = Constant.WebService.Production.Api.User.identify;
-        public Mainpage(profile_data profile, string deviceId)
+        public Mainpage(profile_data profile, string deviceId, string serialSim, string version)
         {
             InitializeComponent();
             this.Title = string.Empty;
@@ -28,7 +28,7 @@ namespace DmobileApp
             navigationPage.BarTextColor = Color.Teal;
             //navigationPage.Icon = "message.png";
             Children.Add(navigationPage);
-            navigationPage = new NavigationPage(new LoanPage(profile, deviceId));
+            navigationPage = new NavigationPage(new LoanPage(profile, deviceId, serialSim, version));
             navigationPage.Title = "สัญญา";
             //navigationPage.Icon = "assignment.png";
             navigationPage.BarBackgroundColor = Color.White;
@@ -36,7 +36,7 @@ namespace DmobileApp
             Children.Add(navigationPage);
             if (Device.RuntimePlatform == Device.iOS)
             {
-                navigationPage = new NavigationPage(new ExitPage(profile, deviceId));
+                navigationPage = new NavigationPage(new ExitPage(profile, deviceId, serialSim, version));
                 navigationPage.Title = "Logout";
                // navigationPage.Icon = "exit2.png";
                 navigationPage.BarBackgroundColor = Color.White;

@@ -7,6 +7,7 @@ using System.Net.Http;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DmobileApp
 {
@@ -16,19 +17,21 @@ namespace DmobileApp
         private string _deviceId = "";
         private string _simSerial = "";
         private string _version = "1";
-        public App(string deviceId="", string simSerial="", string version = "1")
+        private string _phone_number = "";
+        public App(string deviceId="", string simSerial="", string version = "1", string phone_number = "")
         {
             InitializeComponent();
             _deviceId = deviceId;
             _simSerial = simSerial;
             _version = version;
+            _phone_number = phone_number;
             resIdentify = User.identify(deviceId, simSerial, version);
-            MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
+
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)
                 {
-                    MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId));
+                    MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId, simSerial, version));
                     //MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId) { Icon =  });
                     //if (resIdentify.data.PERMIT == "SMS")
                     //    MainPage = new NavigationPage(new ChatSms(resIdentify.data));
@@ -37,11 +40,16 @@ namespace DmobileApp
                     //else
                     //MainPage = new NavigationPage(new Mainpage(resIdentify.data));
                 }
+                else 
+                {
+                    MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+                }
                 //else
-                    //MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
+                //MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
             }
             else
             {
+                MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
                 //MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
                 //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง");
             }
@@ -74,6 +82,8 @@ namespace DmobileApp
         protected override void OnResume()
         {
             // Handle when your app resumes
+            MessagingCenter.Send(this, "refreshSmsOnResume");
+            MessagingCenter.Send(this, "refreshContract");
         }
     }
 }
