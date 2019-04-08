@@ -41,7 +41,7 @@ namespace DmobileApp.Droid
                 var context = Application.Context;
                 deviceId = Secure.GetString(context.ContentResolver, Secure.AndroidId);
                 versionName = context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName;
-                TryToGetPermissions();
+                //TryToGetPermissions();
                 //try
                 //{
                 //    var tMgr = (TelephonyManager)ApplicationContext.GetSystemService(Android.Content.Context.TelephonyService);
@@ -53,7 +53,7 @@ namespace DmobileApp.Droid
                 //}
                 // ActionBar.SetIcon(Resource.Drawable.logo);
 
-                //LoadApplication(new App(deviceId, "2222222222", versionName, ""));
+                LoadApplication(new App(deviceId, "2222222222", versionName, ""));
             }
             catch (System.Exception ex)
             {

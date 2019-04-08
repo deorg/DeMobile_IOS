@@ -21,25 +21,25 @@ namespace DmobileApp
             _deviceID = deviceId;
             _simSerial = simSerial;
             _version = version;
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                if (!string.IsNullOrEmpty(phone_no))
-                {
-                    try
-                    {
-                        _phone_no = phone_no.Replace("+66", "0");
-                        txtPhone.Text = phone_no.Replace("+66", "0");
-                        DependencyService.Get<IMessage>().longAlert("ตรวจพบหมายเลขโทรศัพท์บนเครื่อง");
-                        //var sendClick = btnRegister as IButtonController;
-                        //sendClick.SendClicked();
-                    }
-                    catch
-                    {
-                        _phone_no = phone_no.Replace("+66", "0");
-                        txtPhone.Text = phone_no.Replace("+66", "0");
-                    }
-                }
-            }
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    if (!string.IsNullOrEmpty(phone_no))
+            //    {
+            //        try
+            //        {
+            //            _phone_no = phone_no.Replace("+66", "0");
+            //            txtPhone.Text = phone_no.Replace("+66", "0");
+            //            DependencyService.Get<IMessage>().longAlert("ตรวจพบหมายเลขโทรศัพท์บนเครื่อง");
+            //            //var sendClick = btnRegister as IButtonController;
+            //            //sendClick.SendClicked();
+            //        }
+            //        catch
+            //        {
+            //            _phone_no = phone_no.Replace("+66", "0");
+            //            txtPhone.Text = phone_no.Replace("+66", "0");
+            //        }
+            //    }
+            //}
         }
         //protected override async void OnAppearing()
         //{

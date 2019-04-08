@@ -18,7 +18,7 @@ namespace DmobileApp
         private string _simSerial = "";
         private string _version = "1";
         private string _phone_number = "";
-        public App(string deviceId="", string simSerial="", string version = "1", string phone_number = "")
+        public App(string deviceId="", string simSerial="", string version = "1.0", string phone_number = "")
         {
             InitializeComponent();
             _deviceId = deviceId;
