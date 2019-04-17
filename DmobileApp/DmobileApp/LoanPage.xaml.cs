@@ -18,12 +18,12 @@ namespace DmobileApp
             _deviceId = deviceId;
             _serialSim = serialSim;
             _version = version;
-            var loan = User.getContract(profile.CUST_NO);
-            if(loan.code == 200)
-            {
-                //listContract.ItemsSource = null;
-                listContract.ItemsSource = loan.data;
-            }
+            //var loan = User.getContract(profile.CUST_NO);
+            //if(loan.code == 200)
+            //{
+            //    //listContract.ItemsSource = null;
+            //    listContract.ItemsSource = loan.data;
+            //}
         }
         //private void OnSelected_contract(object sender, SelectedItemChangedEventArgs e)
         //{
@@ -33,18 +33,20 @@ namespace DmobileApp
         //}
         protected override void OnAppearing()
         {
-            MessagingCenter.Subscribe<App>(this, "refreshContract", app => {
-                var contract = User.getContract(_profile.CUST_NO);
-                if (contract.code == 200)
-                    listContract.ItemsSource = contract.data;
-            });
-            base.OnAppearing();
+            //MessagingCenter.Subscribe<App>(this, "refreshContract", app => {
+            //    var contract = User.getContract(_profile.CUST_NO);
+            //    if (contract.code == 200)
+            //        listContract.ItemsSource = contract.data;
+            //});
             //base.OnAppearing();
-            //var loan = User.getContract(_profile.CUST_NO);
-            //if (loan.code == 200)
-            //{
-            //    listContract.ItemsSource = loan.data;
-            //}
+
+
+            var loan = User.getContract(_profile.CUST_NO);
+            if (loan.code == 200)
+            {
+                listContract.ItemsSource = loan.data;
+            }
+            base.OnAppearing();
         }
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {

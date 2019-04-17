@@ -23,7 +23,7 @@ namespace DmobileApp.ViewModels
         private string outgoingText;
 
         private int _skip = 0;
-        private int _take = 5;
+        private int _take = 10;
         public string OutGoingText
         {
             get { return outgoingText; }
@@ -43,7 +43,7 @@ namespace DmobileApp.ViewModels
             if (_cust_no != 0)
             {
                 //Messages = new ObservableCollection<MessageViewModel>();
-                var items = await Services.User.getSmsOffsetAsync(_cust_no, _skip += 5, _take);
+                var items = await Services.User.getSmsOffsetAsync(_cust_no, _skip += 10, _take);
                 //if (items.data.Count > 0)
                 //items.data = items.data.OrderBy(p => p.sms010_pk).ToList();
                 if (items.code == 200)

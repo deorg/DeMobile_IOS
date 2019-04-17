@@ -24,5 +24,7 @@ namespace DmobileApp.Model
         public string TEL { get; set; }
         [JsonProperty("PERMIT")]
         public string PERMIT { get; set; }
+        [JsonProperty("CHAT")]
+        public string CHAT { get; set; }
     }
 }

@@ -23,24 +23,30 @@ namespace DmobileApp
 			InitializeComponent ();
             Title = profile.CUST_NAME;
             _cust_no = profile.CUST_NO;
-            BindingContext = new MainPageViewModel(profile.CUST_NO);
-            //scrollList.ScrollToAsync(MessageControls, ScrollToPosition.End, true);
-            var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
-            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            if (profile.CHAT == "ON")
+                chatBox.IsVisible = true;
+            //BindingContext = new MainPageViewModel(profile.CUST_NO);
+           
+            //var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+            //MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
 
-           // MessagesListView.ScrollTo(MessagesListView.ItemsSource.Cast<Grid>().Count(), ScrollToPosition.End, true);
-            //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+           
         }
 
         protected override void OnAppearing()
         {
-            //base.OnAppearing();
-            MessagingCenter.Subscribe<App>(this, "refreshSmsOnResume", app => {
-                BindingContext = new MainPageViewModel(_cust_no);
-                var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
-                MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
-            });
+            BindingContext = new MainPageViewModel(_cust_no);
+            var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
             base.OnAppearing();
+            // อย่าลืมดัก สำหรับ ios เท่านั้น
+            //MessagingCenter.Subscribe<App>(this, "refreshSmsOnResume", app => {
+            //    BindingContext = new MainPageViewModel(_cust_no);
+            //    var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+            //    MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            //});
+            //base.OnAppearing();
+
             //BindingContext = new MainPageViewModel(_cust_no);
             //var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
             //MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
@@ -68,24 +74,24 @@ namespace DmobileApp
             MessagesListView.SelectedItem = null;
             //txtMessage.Unfocus();
         }
-        //private void Send_Clicked(object sender, EventArgs e)
-        //{
-        //    var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
-        //    MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
-        //    txtMessage.Focus();
-        //    if (!string.IsNullOrEmpty(last.Text))
-        //    {
-        //        var message = new m_custMessage
-        //        {
-        //            cust_no = _cust_no,
-        //            message = last.Text
-        //        };
-        //        var result = User.sendSms(message);
-        //        if(result.code != 200)
-        //        {
-        //            DependencyService.Get<IMessage>().longAlert("ไม่สามารถส่งข้อความได้");
-        //        }
-        //    }
-        //}
+        private void Send_Clicked(object sender, EventArgs e)
+        {
+            var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            txtMessage.Focus();
+            if (!string.IsNullOrEmpty(last.Text))
+            {
+                var message = new m_custMessage
+                {
+                    cust_no = _cust_no,
+                    message = last.Text
+                };
+                var result = User.sendSms(message);
+                if(result.code != 200)
+                {
+                    DependencyService.Get<IMessage>().longAlert("ไม่สามารถส่งข้อความได้");
+                }
+            }
+        }
     }
 }

@@ -70,6 +70,12 @@ namespace DmobileApp
         //}
         private void btnRegister_Clicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtPhone.Text))
+            {
+                DisplayAlert("ไม่สามารถลงทะเบียนได้", "กรุณากรอกหมายเลขโทรศัพท์ของท่าน", "ตกลง");
+                txtPhone.Focus();
+                return;
+            }
             var version = double.Parse(_version);
             m_register data = new m_register();
             //data.citizen_no = txtCitizen.Text;
