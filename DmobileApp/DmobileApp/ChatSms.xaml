@@ -20,7 +20,11 @@
             SeparatorVisibility="None"
             RelativeLayout.HeightConstraint="{ConstraintExpression 
             Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"
-            BackgroundColor="Transparent" > 
+            BackgroundColor="Transparent" 
+            IsPullToRefreshEnabled="true"
+                  RefreshCommand="{Binding RefreshSms}"
+                  IsRefreshing="{Binding IsRefreshing}"> 
+            
         </ListView>
         <!--</ScrollView>-->
 <!--        <StackLayout>-->

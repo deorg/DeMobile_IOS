@@ -3,10 +3,11 @@ using DmobileApp.Services;
 using DmobileApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,7 @@ namespace DmobileApp
 	public partial class ChatSms : ContentPage
 	{
         private int _cust_no;
+
 		public ChatSms(profile_data profile)
 		{
 			InitializeComponent ();
@@ -29,6 +31,7 @@ namespace DmobileApp
            // MessagesListView.ScrollTo(MessagesListView.ItemsSource.Cast<Grid>().Count(), ScrollToPosition.End, true);
             //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
         }
+
         protected override void OnAppearing()
         {
             //base.OnAppearing();
@@ -47,6 +50,18 @@ namespace DmobileApp
             MessagesListView.SelectedItem = null;
             //txtMessage.Unfocus();
         }
+
+        //void Handle_ItemAppearing(object sender, Xamarin.Forms.ItemVisibilityEventArgs e)
+        //{
+        //    var item = e.Item as MessageViewModel;
+        //    var index = MessagesListView.ItemsSource.Cast<MessageViewModel>().First();
+        //    if (item != null && item == index)
+        //    {
+        //        Debug.WriteLine("item scroll ========> " + item.Text);
+        //        Debug.WriteLine("item first =========> " + index.Text);
+        //    }
+        //}
+
 
         private void MyListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {

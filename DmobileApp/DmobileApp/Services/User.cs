@@ -152,6 +152,29 @@ namespace DmobileApp.Services
                 }
             }
         }
+        public static async System.Threading.Tasks.Task<m_sms> getSmsOffsetAsync(int cust_no, int skip = 0, int take = 0)
+        {
+            string SmsUrl = $"{Constant.WebService.Production.Api.User.getSmsOffset}id={cust_no}&skip={skip}&take={take}";
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Host);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.GetAsync(SmsUrl).Result;
+                var content = await response.Content.ReadAsStringAsync();
+                var sms = JsonConvert.DeserializeObject<m_sms>(content);
+                if (response.IsSuccessStatusCode)
+                {
+                    client.Dispose();
+                    return sms;
+                }
+                else
+                {
+                    client.Dispose();
+                    return null;
+                }
+            }
+        }
         public static m_custMessageRes sendSms(m_custMessage message)
         {
             string sendSmsUrl = Constant.WebService.Production.Api.User.sendSms;

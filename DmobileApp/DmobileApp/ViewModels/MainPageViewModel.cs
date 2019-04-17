@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
+using DmobileApp.Model;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace DmobileApp.ViewModels
 {
@@ -16,15 +19,72 @@ namespace DmobileApp.ViewModels
             get { return messagesList; }
             set { messagesList = value; RaisePropertyChanged(); }
         }
-
+        private int _cust_no;
         private string outgoingText;
 
+        private int _skip = 0;
+        private int _take = 5;
         public string OutGoingText
         {
             get { return outgoingText; }
             set { outgoingText = value; RaisePropertyChanged(); }
         }
-
+        private bool _isRefreshing = false;
+        public bool IsRefreshing {
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                RaisePropertyChanged("IsRefreshing");
+            }
+        }
+        private async System.Threading.Tasks.Task refreshAsync()
+        {
+            if (_cust_no != 0)
+            {
+                //Messages = new ObservableCollection<MessageViewModel>();
+                var items = await Services.User.getSmsOffsetAsync(_cust_no, _skip += 5, _take);
+                //if (items.data.Count > 0)
+                //items.data = items.data.OrderBy(p => p.sms010_pk).ToList();
+                if (items.code == 200)
+                {
+                    //if (Device.RuntimePlatform == Device.Android)
+                    //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+                    if (items.data.Count != 0)
+                    {
+                        foreach (var msg in items.data)
+                        {
+                            Messages.Insert(0, new MessageViewModel
+                            {
+                                Text = msg.sms_note,
+                                IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
+                                //MessageDateTime = DateTime.Now
+                                MessageDateTime = msg.sms_time
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                        DependencyService.Get<IMessage>().longAlert(items.message);
+                }
+            }
+            else
+                DependencyService.Get<IMessage>().longAlert("ไม่พบข้อมูลของคุณในระบบ SMS");
+        }
+        public ICommand RefreshSms
+        {
+            get
+            {
+                return new Command(async () => 
+                {
+                    IsRefreshing = true;
+                    await refreshAsync();
+                    IsRefreshing = false;
+                });
+            }
+        }
         public ICommand SendCommand { get; set; }
 
 
@@ -33,17 +93,18 @@ namespace DmobileApp.ViewModels
             // Initialize with default values
             try
             {
+                _cust_no = cust_no;
                 if (cust_no != 0)
                 {
                     Messages = new ObservableCollection<MessageViewModel>();                   
-                    var items = Services.User.getSms(cust_no);
-                    if (items.code == 200)
+                    var items = Services.User.getSmsOffsetAsync(cust_no, _skip, _take);
+                    if (items.Result.code == 200)
                     {
                         //if (Device.RuntimePlatform == Device.Android)
                             //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
-                        if (items.data.Count != 0)
+                        if (items.Result.data.Count != 0)
                         {
-                            foreach (var msg in items.data)
+                            foreach (var msg in items.Result.data)
                             {
                                 Messages.Add(new MessageViewModel
                                 {
@@ -58,7 +119,7 @@ namespace DmobileApp.ViewModels
                     else
                     {
                         if(Device.RuntimePlatform == Device.Android)
-                            DependencyService.Get<IMessage>().longAlert(items.message);
+                            DependencyService.Get<IMessage>().longAlert(items.Result.message);
                     }
                 }
                 else

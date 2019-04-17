@@ -91,6 +91,8 @@
     <AndroidResource Include="Resources\drawable\message.png" />
     <AndroidResource Include="Resources\drawable\background5.jpg" />
     <AndroidResource Include="Resources\drawable\exit.png" />
+    <AndroidResource Include="Resources\drawable\splash.png" />
+    <AndroidResource Include="Resources\drawable\splash2.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

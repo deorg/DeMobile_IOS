@@ -26,7 +26,6 @@ namespace DmobileApp
             _version = version;
             _phone_number = phone_number;
             resIdentify = User.identify(deviceId, simSerial, version);
-
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)

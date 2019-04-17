@@ -10,7 +10,8 @@ namespace DmobileApp.Concret
         {
             public static class Production
             {
-                public const string Host = "http://35.197.153.92";
+                //public const string Host = "http://35.197.153.92";
+                public const string Host = "http://b39da2f5.ngrok.io";
                 public const string Port = "80";
                 public static class Api
                 {
@@ -19,6 +20,7 @@ namespace DmobileApp.Concret
                         public const string identify = "api/authen/identify?";
                         public const string register = "api/authen/register";
                         public const string getSms = "api/customer/sms?id=";
+                        public const string getSmsOffset = "api/customer/sms/offset?";
                         public const string sendSms = "api/customer/sendmessage";
                         public const string getProfile = "api/customer/profile?id=";
                         public const string getContract = "api/customer/contract?id=";
