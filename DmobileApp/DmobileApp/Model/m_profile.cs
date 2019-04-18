@@ -26,5 +26,7 @@ namespace DmobileApp.Model
         public string PERMIT { get; set; }
         [JsonProperty("CHAT")]
         public string CHAT { get; set; }
+        [JsonProperty("APP_VERSION")]
+        public double APP_VERSION { get; set; } = 2.8;
     }
 }

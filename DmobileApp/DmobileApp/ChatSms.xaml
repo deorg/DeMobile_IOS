@@ -4,6 +4,10 @@
              x:Class="DmobileApp.ChatSms"
              xmlns:local="clr-namespace:DmobileApp;assembly=DmobileApp"
              BackgroundImage="background5.jpg">
+   <!-- <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Domestic"/>
+        <ToolbarItem Text="Update!" Icon="update.png" />     
+    </ContentPage.ToolbarItems>-->
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:SmsDataTemplateSelector x:Key="MessageTemplateSelector"></local:SmsDataTemplateSelector>

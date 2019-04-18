@@ -22,6 +22,14 @@ namespace DmobileApp
 		{
 			InitializeComponent ();
             Title = profile.CUST_NAME;
+
+            var toolBarItem = new ToolbarItem("update", "update.png", () => {
+                Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
+            }, 0, 0);
+
+            ToolbarItems.Add(toolBarItem);
+           //ToolbarItems.Add(new ToolbarItem() { Text = "อัพเดท"});
+
             _cust_no = profile.CUST_NO;
             if (profile.CHAT == "ON")
                 chatBox.IsVisible = true;
@@ -29,8 +37,6 @@ namespace DmobileApp
            
             //var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
             //MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
-
-           
         }
 
         protected override void OnAppearing()

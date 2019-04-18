@@ -14,7 +14,7 @@ namespace DmobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Register : ContentPage
     {
-        private string _deviceID, _simSerial, _version, _phone_no;
+        private string _deviceID, _simSerial, _version;
         public Register(string deviceId = "", string simSerial = "", string version = "1", string phone_no = "")
         {
             InitializeComponent();
