@@ -22,7 +22,8 @@ namespace DmobileApp
         {
             InitializeComponent();
             this.Title = string.Empty;
-            var navigationPage = new NavigationPage(new ChatSms(profile));
+            var navigationPage = new NavigationPage(new ChatSms(profile, version));
+            //this.BarTextColor = Color.Teal;
             navigationPage.Title = "ข้อความ";
             navigationPage.BarBackgroundColor = Color.White;
             navigationPage.BarTextColor = Color.Teal;

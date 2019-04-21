@@ -56,7 +56,7 @@ namespace DmobileApp.ViewModels
                         {
                             Messages.Insert(0, new MessageViewModel
                             {
-                                Text = msg.sms_note,
+                                Text = msg.sms_note.Replace("\r", "\n"),
                                 IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
                                 //MessageDateTime = DateTime.Now
                                 MessageDateTime = msg.sms_time
@@ -108,7 +108,7 @@ namespace DmobileApp.ViewModels
                             {
                                 Messages.Add(new MessageViewModel
                                 {
-                                    Text = msg.sms_note,
+                                    Text = msg.sms_note.Replace("\r", "\n"),
                                     IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
                                     //MessageDateTime = DateTime.Now
                                     MessageDateTime = msg.sms_time
@@ -146,8 +146,46 @@ namespace DmobileApp.ViewModels
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                if(Device.RuntimePlatform == Device.Android)
-                    DependencyService.Get<IMessage>().longAlert(e.Message);
+                if (e.Message == "One or more errors occurred. (One or more errors occurred. (Connection reset))" || e.Message == "One or more errors occurred. (One or more errors occurred. (unexpected end of stream on com.android.okhttp.Address@ae191fe7))")
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                        DependencyService.Get<IMessage>().longAlert("ขาดการเชื่อมต่อจากอินเทอร์เน็ต!");
+                    //if (cust_no != 0)
+                    //{
+                    //    Messages = new ObservableCollection<MessageViewModel>();
+                    //    var items = Services.User.getSmsOffsetAsync(cust_no, _skip, _take);
+                    //    if (items.Result.code == 200)
+                    //    {
+                    //        //if (Device.RuntimePlatform == Device.Android)
+                    //        //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+                    //        if (items.Result.data.Count != 0)
+                    //        {
+                    //            foreach (var msg in items.Result.data)
+                    //            {
+                    //                Messages.Add(new MessageViewModel
+                    //                {
+                    //                    Text = msg.sms_note.Replace("\r", "\n"),
+                    //                    IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
+                    //                    //MessageDateTime = DateTime.Now
+                    //                    MessageDateTime = msg.sms_time
+                    //                });
+                    //            }
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        if (Device.RuntimePlatform == Device.Android)
+                    //            DependencyService.Get<IMessage>().longAlert(items.Result.message);
+                    //    }
+                    //}
+                    //else
+                        //DependencyService.Get<IMessage>().longAlert("ไม่พบข้อมูลของคุณในระบบ SMS");
+                }
+                else
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                        DependencyService.Get<IMessage>().longAlert(e.Message);
+                }
             }   
         }
         // public List<MessageViewModel> Messages { get; set; } = new List<MessageViewModel>();

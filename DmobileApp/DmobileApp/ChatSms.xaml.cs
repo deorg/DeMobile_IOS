@@ -17,18 +17,36 @@ namespace DmobileApp
 	public partial class ChatSms : ContentPage
 	{
         private int _cust_no;
+        private double app_version, current_version;
 
-		public ChatSms(profile_data profile)
+		public ChatSms(profile_data profile, string version)
 		{
 			InitializeComponent ();
             Title = profile.CUST_NAME;
+            app_version = profile.APP_VERSION;
+            //app_version = 2.8;
+            current_version = double.Parse(version);
 
-            var toolBarItem = new ToolbarItem("update", "update.png", () => {
-                Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
-            }, 0, 0);
+            //if (2.8 > current_version)
+            //{
+            //    var toolBarItem = new ToolbarItem("update", "update.png", () =>
+            //    {
+            //        Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
+            //    }, 0, 0);
 
-            ToolbarItems.Add(toolBarItem);
-           //ToolbarItems.Add(new ToolbarItem() { Text = "อัพเดท"});
+            //    ToolbarItems.Add(toolBarItem);
+            //}
+            ToolbarItems.Add(new ToolbarItem() { Text = "เวอร์ชั่น "+version });
+            if(app_version > current_version)
+            {
+                var tooBarItem = new ToolbarItem("กดอัดเดท", "update.png", () =>
+                {
+                    Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
+                },0,0);
+                ToolbarItems.Add(tooBarItem);
+            }
+            //Debug.WriteLine("-------------- app version => " + profile.APP_VERSION);
+            //Debug.WriteLine("-------------- current version => " + version);
 
             _cust_no = profile.CUST_NO;
             if (profile.CHAT == "ON")
@@ -41,10 +59,18 @@ namespace DmobileApp
 
         protected override void OnAppearing()
         {
-            BindingContext = new MainPageViewModel(_cust_no);
-            var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
-            MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            var messages = new MainPageViewModel(_cust_no);
+            //BindingContext = new MainPageViewModel(_cust_no);
+            if (messages.Messages.Count > 0)
+            {
+                BindingContext = messages;
+                //BindingContext = new MainPageViewModel(_cust_no);
+                var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
+                MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
+            }
             base.OnAppearing();
+
+
             // อย่าลืมดัก สำหรับ ios เท่านั้น
             //MessagingCenter.Subscribe<App>(this, "refreshSmsOnResume", app => {
             //    BindingContext = new MainPageViewModel(_cust_no);
@@ -59,6 +85,18 @@ namespace DmobileApp
         }
         private void MyListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            var message = MessagesListView.SelectedItem as MessageViewModel;
+            if (message != null)
+            {
+                if (message.Text.Contains("อัพเดทเวอร์ชั่น"))
+                {
+                    if (app_version > current_version)
+                        Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
+                    else
+                        DisplayAlert("", "D-MobileApp บนเครื่องของคุณเป็นเวอร์ชั่นล่าสุดแล้ว!", "ตกลง");
+                }
+            }
+
             MessagesListView.SelectedItem = null;
             //txtMessage.Unfocus();
         }
