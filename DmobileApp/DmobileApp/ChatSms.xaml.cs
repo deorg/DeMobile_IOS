@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,14 +19,23 @@ namespace DmobileApp
 	{
         private int _cust_no;
         private double app_version, current_version;
+        private List<string> notiMessage = new List<string>();
+        private double _notiWidth;
 
-		public ChatSms(profile_data profile, string version)
+        public ChatSms(profile_data profile, string version)
 		{
 			InitializeComponent ();
             Title = profile.CUST_NAME;
             app_version = profile.APP_VERSION;
-            //app_version = 2.8;
+            app_version = 2.9;
             current_version = double.Parse(version);
+            notiMessage.Add("ยินดีต้อนรับคุณณัฏฐพัชร ชัยประพันธ์");
+            notiMessage.Add("ข้อความแจ้งเตือนจะถูกอัพเดทในเวลาประมาณ 8.30น.ของทุกวัน");
+            notiMessage.Add("หากมีข้อสงสัยกรุณาติดต่อ 034762422");
+            notiTxt.Text = notiMessage.FirstOrDefault();
+            //notiTxt.TranslationX = 300;
+            //notiTxt.Text = notiMessage.FirstOrDefault();
+
 
             //if (2.8 > current_version)
             //{
@@ -68,6 +78,7 @@ namespace DmobileApp
                 var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
                 MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
             }
+            startNotiMessage();
             base.OnAppearing();
 
 
@@ -98,9 +109,36 @@ namespace DmobileApp
             }
 
             MessagesListView.SelectedItem = null;
+
+            //var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            //Debug.WriteLine("Display size =====> " + mainDisplayInfo.Width);
+            //Debug.WriteLine("Text size ========> " + notiTxt.Width);
+            //notiTxt.TranslationX = 335;
+            // notiTxt.TranslateTo(500, 0, 5000, Easing.Linear);
+            //notiTxt.Text = "ข้อความเปลี่ยน";
             //txtMessage.Unfocus();
         }
 
+        private async void startNotiMessage()
+        {
+            //_notiWidth = notiTxt.Width;
+            //notiTxt.TranslationX = 340;
+            //Debug.WriteLine("noti widht =======> " + _notiWidth);
+            foreach (var msg in notiMessage)
+            {
+                notiTxt.Text = msg;
+                _notiWidth = notiTxt.TranslationX = notiTxt.Width;
+                Debug.WriteLine("noti widht =======> " + _notiWidth);
+                await notiTxt.TranslateTo(-_notiWidth, 0, 18000, Easing.SinIn);
+                notiTxt.TranslationX = _notiWidth;
+
+                //await notiTxt.FadeTo(0, 2000, Easing.SinInOut);
+                //await Task.Delay(2000);
+                //notiTxt.Text = msg;
+                //await notiTxt.FadeTo(1, 2000, Easing.SinInOut);
+                //await Task.Delay(2000);
+            }
+        }
         //void Handle_ItemAppearing(object sender, Xamarin.Forms.ItemVisibilityEventArgs e)
         //{
         //    var item = e.Item as MessageViewModel;

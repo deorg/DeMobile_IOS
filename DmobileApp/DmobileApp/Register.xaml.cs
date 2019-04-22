@@ -21,6 +21,8 @@ namespace DmobileApp
             _deviceID = deviceId;
             _simSerial = simSerial;
             _version = version;
+
+
             //if (Device.RuntimePlatform == Device.Android)
             //{
             //    if (!string.IsNullOrEmpty(phone_no))

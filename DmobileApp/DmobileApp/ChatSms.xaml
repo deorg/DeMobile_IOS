@@ -31,6 +31,13 @@
             
         </ListView>
         <!--</ScrollView>-->
+        
+        <StackLayout x:Name="notiBox" BackgroundColor="Transparent" Padding="10, 0, 10, 5">
+            <ScrollView Orientation="Vertical">
+                <Label x:Name="notiTxt" TextColor="Teal" FontSize="16" FontAttributes="Bold"></Label>
+            </ScrollView>
+        </StackLayout>
+        
         <StackLayout x:Name="chatBox" IsVisible="false">
             <Grid x:Name="MessageControls" RowSpacing="1" ColumnSpacing="2" Padding="5,0" 
           BackgroundColor="Transparent" 

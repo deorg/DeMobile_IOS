@@ -11,7 +11,7 @@ namespace DmobileApp.Concret
             public static class Production
             {
                 public const string Host = "http://35.197.153.92";
-                //public const string Host = "http://771ef2a3.ngrok.io";
+                //public const string Host = "http://57ca8deb.ngrok.io";
                 public const string Port = "80";
                 public static class Api
                 {
