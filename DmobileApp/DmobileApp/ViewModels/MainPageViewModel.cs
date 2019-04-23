@@ -56,7 +56,7 @@ namespace DmobileApp.ViewModels
                         {
                             Messages.Insert(0, new MessageViewModel
                             {
-                                Text = msg.sms_note.Replace("\r", "\n"),
+                                Text = msg.sms_note,
                                 IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
                                 //MessageDateTime = DateTime.Now
                                 MessageDateTime = msg.sms_time
@@ -108,7 +108,7 @@ namespace DmobileApp.ViewModels
                             {
                                 Messages.Add(new MessageViewModel
                                 {
-                                    Text = msg.sms_note.Replace("\r", "\n"),
+                                    Text = msg.sms_note,
                                     IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
                                     //MessageDateTime = DateTime.Now
                                     MessageDateTime = msg.sms_time

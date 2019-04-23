@@ -51,7 +51,7 @@ namespace DmobileApp.Droid
                 //{
                 //    phone_number = string.Empty;
                 //}
-                // ActionBar.SetIcon(Resource.Drawable.logo);
+                //ActionBar.SetIcon(Resource.Drawable.logo);
 
                 LoadApplication(new App(deviceId, "2222222222", versionName, ""));
             }

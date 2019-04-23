@@ -32,10 +32,12 @@
         </ListView>
         <!--</ScrollView>-->
         
-        <StackLayout x:Name="notiBox" BackgroundColor="Transparent" Padding="10, 0, 10, 5">
-            <ScrollView Orientation="Vertical">
-                <Label x:Name="notiTxt" TextColor="Teal" FontSize="16" FontAttributes="Bold"></Label>
-            </ScrollView>
+        <StackLayout x:Name="notiBox" Padding="10, 0, 10, 5" IsVisible="false">
+<!--            <ScrollView x:Name="notiScroll" Orientation="Horizontal">-->
+            <Frame x:Name="notiFrame" CornerRadius="10" Padding="5,5,5,5">
+                <Label x:Name="notiTxt" TextColor="Teal" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                </Frame>
+<!--            </ScrollView>-->
         </StackLayout>
         
         <StackLayout x:Name="chatBox" IsVisible="false">

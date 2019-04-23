@@ -28,5 +28,18 @@ namespace DmobileApp.Model
         public string CHAT { get; set; }
         [JsonProperty("APP_VERSION")]
         public double APP_VERSION { get; set; } = 2.8;
+        [JsonProperty("BROADCAST")]
+        public broadcast_data BROADCAST { get; set; }
+    }
+    public class broadcast_data
+    {
+        [JsonProperty("note")]
+        public string NOTE { get; set; }
+        [JsonProperty("start_time")]
+        public DateTime START_TIME { get; set; }
+        [JsonProperty("end_time")]
+        public DateTime END_TIME { get; set; }
+        [JsonProperty("created_time")]
+        public DateTime CREATED_TIME { get; set; }
     }
 }
