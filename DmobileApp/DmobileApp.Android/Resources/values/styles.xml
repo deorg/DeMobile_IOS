@@ -27,7 +27,7 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
-    <item name="actionMenuTextColor">#ff0000</item>
+    <item name="actionMenuTextColor">#f97103</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">

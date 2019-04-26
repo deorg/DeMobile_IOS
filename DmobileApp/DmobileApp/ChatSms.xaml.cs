@@ -29,7 +29,7 @@ namespace DmobileApp
 			InitializeComponent ();
             Title = profile.CUST_NAME;
             app_version = profile.APP_VERSION;
-           
+
             current_version = double.Parse(version);
             //getListColor();
             //notiBox.BackgroundColor = colors[count].Color;
@@ -73,7 +73,7 @@ namespace DmobileApp
             }
             else
             {
-                ToolbarItems.Add(new ToolbarItem() { Text = "V# " + version });
+                ToolbarItems.Add(new ToolbarItem() { Text = "เวอร์ชั่น\n" + version });
             }
 
             _cust_no = profile.CUST_NO;

@@ -39,6 +39,12 @@ namespace DmobileApp
                     //else
                     //MainPage = new NavigationPage(new Mainpage(resIdentify.data));
                 }
+                else if(resIdentify.code == 402)
+                {
+                    MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+
+                    //MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+                }
                 else 
                 {
                     MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
@@ -71,6 +77,13 @@ namespace DmobileApp
             if (resIdentify == null)
             {
                 MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "ไม่สามารถเชื่อมต่อบริการได้ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
+            }
+            else
+            {
+                if(resIdentify.code == 402)
+                {
+                    MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", resIdentify.message, "ตกลง");
+                }
             }
         }
         protected override void OnSleep()
