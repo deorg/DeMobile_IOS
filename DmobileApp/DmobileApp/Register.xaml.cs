@@ -2,6 +2,7 @@
 using DmobileApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,11 +71,11 @@ namespace DmobileApp
         //    base.OnAppearing();
         //    //MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
         //}
-        private void btnRegister_Clicked(object sender, EventArgs e)
+        private async void btnRegister_Clicked(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtPhone.Text))
             {
-                DisplayAlert("ไม่สามารถลงทะเบียนได้", "กรุณากรอกหมายเลขโทรศัพท์ของท่าน", "ตกลง");
+                await DisplayAlert("ไม่สามารถลงทะเบียนได้", "กรุณากรอกหมายเลขโทรศัพท์ของท่าน", "ตกลง");
                 txtPhone.Focus();
                 return;
             }
@@ -98,6 +99,81 @@ namespace DmobileApp
             data.brand = DeviceInfo.Manufacturer;
             data.model = DeviceInfo.Model;
             data.api_version = DeviceInfo.VersionString;
+            var result = Services.User.preIdentify(data.phone_no);
+            if(result != null)
+            {
+                if(result.code == 200)
+                {
+                    if(result.data.Count > 1)
+                    {
+                        List<string> menu = new List<string>();
+                        foreach(var n in result.data)
+                        {
+                            menu.Add("คุณ"+n.CUST_NAME+"\n"+n.CITIZEN_NO);
+                        }
+                        var action = await DisplayActionSheet("D-Mobile App ยินดีต้อนรับ\nกรูณากดเลือก", null, "ไม่พบชื่อของท่าน", menu.ToArray());
+                        Debug.WriteLine($"pipe => The action is {action}");
+                    }
+                    else
+                    {
+                        var action = await DisplayAlert("D-Mobile App ยินดีต้อนรับ\nกรุณาตรวจสอบการชำระเงินทุกวัน", $"คุณ {result.data.First().CUST_NAME}", "ใช่", "ไม่ใช่");
+                        Debug.WriteLine($"pipe => The action is {action}");
+                        if (action)
+                        {
+                            register(data);
+                        }
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("", result.message, "ตกลง");
+                }
+            }
+            //var result = Services.User.register(data);
+            //if(result != null)
+            //{
+            //    if(result.code == 200)
+            //    {
+            //        if(Device.RuntimePlatform == Device.Android)
+            //            DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");
+                       
+
+            //        Navigation.PushAsync(new Mainpage(result.data, _deviceID, _simSerial, _version));
+            //        Navigation.RemovePage(this);
+
+            //        //if (result.data.PERMIT == "BOTH")
+            //        //{
+            //        //    Navigation.PushAsync(new Mainpage(result.data));
+            //        //    Navigation.RemovePage(this);
+            //        //}
+            //        //else if(result.data.PERMIT == "SMS")
+            //        //{
+            //        //    Navigation.PushAsync(new ChatSms(result.data));
+            //        //    Navigation.RemovePage(this);
+            //        //}
+            //        //else if(result.data.PERMIT == "PAYMENT")
+            //        //{
+            //        //    Navigation.PushAsync(new LoanPage(result.data));
+            //        //    Navigation.RemovePage(this);                       
+            //        //}
+            //    }
+            //    else
+            //    {
+            //        DisplayAlert("ไม่สามารถลงทะเบียนได้", result.message, "ตกลง");
+            //        //if(Device.RuntimePlatform == Device.Android)
+            //        //DependencyService.Get<IMessage>().longAlert(result.message);
+            //    }
+            //}
+            //else
+            //{
+            //    DisplayAlert("ไม่สามารถลงทะเบียนได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลงทะเบียนใหม่ในภายหลัง", "ตกลง");
+            //    txtPhone.Text = "";
+            //    //if(Device.RuntimePlatform == Device.Android)
+            //        //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
+            //}
+        }
+        private void register(m_register data)
+        {
             var result = Services.User.register(data);
             if(result != null)
             {
@@ -105,7 +181,7 @@ namespace DmobileApp
                 {
                     if(Device.RuntimePlatform == Device.Android)
                         DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");
-                       
+
 
                     Navigation.PushAsync(new Mainpage(result.data, _deviceID, _simSerial, _version));
                     Navigation.RemovePage(this);

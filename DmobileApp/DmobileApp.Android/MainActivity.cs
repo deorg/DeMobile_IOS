@@ -15,6 +15,7 @@ using Android.Support.Design.Widget;
 using Java.Lang;
 using Java.Util;
 using System.Threading.Tasks;
+using Plugin.LocalNotifications;
 
 namespace DmobileApp.Droid
 {
@@ -52,6 +53,7 @@ namespace DmobileApp.Droid
                 //    phone_number = string.Empty;
                 //}
                 //ActionBar.SetIcon(Resource.Drawable.logo);
+                LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.logo;
 
                 LoadApplication(new App(deviceId, "2222222222", versionName, ""));
             }

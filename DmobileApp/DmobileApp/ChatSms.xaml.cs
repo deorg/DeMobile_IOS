@@ -62,7 +62,10 @@ namespace DmobileApp
                     //    notiBox.BackgroundColor = colors[count].Color;
                     //    notiTxt.Text = colors[count].Name;
                     //}
-                    Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
+                    if(Device.RuntimePlatform == Device.Android)
+                        Device.OpenUri(new Uri("https://play.google.com/store/apps/details?id=com.Domestic.DmobileApp"));
+                    else if(Device.RuntimePlatform == Device.iOS)
+                        Device.OpenUri(new Uri("https://itunes.apple.com/us/app/d-mobileapp/id1457641979?ls=1&mt=8"));
                 };
                 ToolbarItems.Add(toolBarItem);
                 //toolBarItem = new ToolbarItem("กดอัพเดท", "update.png", () =>
@@ -73,7 +76,10 @@ namespace DmobileApp
             }
             else
             {
-                ToolbarItems.Add(new ToolbarItem() { Text = "เวอร์ชั่น\n" + version });
+                if (Device.RuntimePlatform == Device.Android)
+                    ToolbarItems.Add(new ToolbarItem() { Text = "เวอร์ชั่น\n" + version });
+                else if (Device.RuntimePlatform == Device.iOS)
+                    ToolbarItems.Add(new ToolbarItem() { Text = "เวอร์ชั่น" + version });
             }
 
             _cust_no = profile.CUST_NO;
@@ -88,11 +94,9 @@ namespace DmobileApp
         protected override void OnAppearing()
         {
             var messages = new MainPageViewModel(_cust_no);
-            //BindingContext = new MainPageViewModel(_cust_no);
             if (messages.Messages.Count > 0)
             {
                 BindingContext = messages;
-                //BindingContext = new MainPageViewModel(_cust_no);
                 var last = MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault();
                 MessagesListView.ScrollTo(last, ScrollToPosition.End, true);
             }

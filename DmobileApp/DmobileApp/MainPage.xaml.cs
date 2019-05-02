@@ -3,11 +3,12 @@ using DmobileApp.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.AspNet.SignalR.Client;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +22,39 @@ namespace DmobileApp
         public Mainpage(profile_data profile, string deviceId, string serialSim, string version)
         {
             InitializeComponent();
+
+            //var connection = new HubConnection("http://dba2df14.ngrok.io/signalr");
+            //var notifyHub = connection.CreateHubProxy("NotificationHub");
+            //connection.Start();
+
+            //notifyHub.On("connect", async (string message) =>
+            //{
+            //    Debug.WriteLine(message);
+            //    Debug.WriteLine(message);
+            //    Debug.WriteLine(message);
+            //    Debug.WriteLine(message);
+            //    Debug.WriteLine(message);
+            //    Debug.WriteLine(message);
+            //    await notifyHub.Invoke("registerContext", deviceId);
+            //});
+            //notifyHub.On("notify", (string message) =>
+            //{
+            //    Debug.WriteLine($"pipe => New notification is {message}");
+            //});
+            //connection.Closed += () =>
+            //{
+            //    Debug.WriteLine("pipe => Connection closed......");
+            //    //await Task.Delay(new Random().Next(0, 5) * 1000);
+            //    //await connection.Start();
+            //};
+            //connection.Reconnected += () =>
+            //{
+            //    Debug.WriteLine("pipe => Connection reconnected.......");
+            //};
+            //connection.Reconnecting += () => {
+            //    Debug.WriteLine("pipe => Connection reconnecting.......");
+            //};
+
             this.Title = string.Empty;
             var navigationPage = new NavigationPage(new ChatSms(profile, version));
             //this.BarTextColor = Color.Teal;
