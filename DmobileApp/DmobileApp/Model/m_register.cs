@@ -6,6 +6,7 @@ namespace DmobileApp.Model
 {
     public class m_register
     {
+        public int cust_no { get; set; }
         public string citizen_no { get; set; }
         public string phone_no { get; set; }
         public string device_id { get; set; }

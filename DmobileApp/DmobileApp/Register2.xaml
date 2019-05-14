@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="DmobileApp.Register2" Title="ลงทะเบียน">
+    <ContentPage.Content>
+        <StackLayout x:Name="loginCard" VerticalOptions="Center"  HorizontalOptions="Center">
+            <Frame x:Name="loginForm" HasShadow="true" CornerRadius="10" BackgroundColor="White" OutlineColor="Teal" BorderColor="Teal">
+                <StackLayout>
+                    <Image Source="logo.png" HeightRequest="100" WidthRequest="100"/> 
+                    <Entry x:Name="txtPhone" HorizontalTextAlignment="Center" Placeholder="หมายเลขโทรศัพท์" PlaceholderColor="#d1cccc" FontSize="32" Keyboard="Telephone" FontAttributes="Bold"/>
+                     <Button x:Name="btnRegister" Text="ลงทะเบียน" BackgroundColor="#1F7A8C" TextColor="White" FontSize="32" Clicked="Handle_ClickedAsync"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

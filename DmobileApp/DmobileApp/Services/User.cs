@@ -3,6 +3,7 @@ using DmobileApp.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -39,8 +40,9 @@ namespace DmobileApp.Services
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
+                Debug.WriteLine("pipe => " + e.Message);
                 return null;
             }
         }
@@ -102,7 +104,7 @@ namespace DmobileApp.Services
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
                 return null;
             }
         }

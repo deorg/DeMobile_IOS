@@ -30,37 +30,39 @@ namespace DmobileApp
             _simSerial = simSerial;
             _version = version;
             _phone_number = phone_number;
+            //MainPage = new Register2();
             resIdentify = User.identify(deviceId, simSerial, version);
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)
                 {
-                    MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId, simSerial, version));
-                        //connection = new HubConnection("http://33092ab1.ngrok.io/signalr");
-                        //notifyHub = connection.CreateHubProxy("NotificationHub");
-                        //Debug.WriteLine("pipe => In App contructor");
-                        //if (Application.Current.Properties.ContainsKey("conn_ws"))
-                        //{
-                        //    p_connection = Application.Current.Properties["conn_ws"].ToString();
-                        //    //Application.Current.Properties["conn_ws"] = "disconnected";
-                        //    Debug.WriteLine($"pipe => found key [conn_ws] = {p_connection}");
-                        //    Debug.WriteLine($"pipe => connection state {connection.State}");
-                        //    if (connection.State == ConnectionState.Disconnected)
-                        //        connection.Start();
-                        //}
-                        //else
-                        //{
-                        //    Debug.WriteLine("pipe => not found key[conn_ws]");
-                        //    Debug.WriteLine($"pipe => connection state {connection.State}");
-                        //    connection.Start();
-                        //}
+                    //MainPage = new NavigationPage(new Mainpage(resIdentify.data, deviceId, simSerial, version));
+                    MainPage = new Mainpage(resIdentify.data, deviceId, simSerial, version);
+                    //connection = new HubConnection("http://f069158b.ngrok.io/signalr");
+                    //notifyHub = connection.CreateHubProxy("NotificationHub");
+                    //Debug.WriteLine("pipe => In App contructor");
+                    //if (Application.Current.Properties.ContainsKey("conn_ws"))
+                    //{
+                    //    p_connection = Application.Current.Properties["conn_ws"].ToString();
+                    //    //Application.Current.Properties["conn_ws"] = "disconnected";
+                    //    Debug.WriteLine($"pipe => found key [conn_ws] = {p_connection}");
+                    //    Debug.WriteLine($"pipe => connection state {connection.State}");
+                    //    if (connection.State == ConnectionState.Disconnected)
+                    //        connection.Start();
+                    //}
+                    //else
+                    //{
+                    //    Debug.WriteLine("pipe => not found key[conn_ws]");
+                    //    Debug.WriteLine($"pipe => connection state {connection.State}");
+                    //    connection.Start();
+                    //}
 
-                        //connection.Closed += async () => await Connection_ClosedAsync();
-                        //connection.Reconnected += async () => await Connection_ReconnectedAsync();
-                        //connection.Reconnecting += Connection_Reconnecting;
+                    //connection.Closed += async () => await Connection_ClosedAsync();
+                    //connection.Reconnected += async () => await Connection_ReconnectedAsync();
+                    //connection.Reconnecting += Connection_Reconnecting;
 
-                        //notifyHub.On("connect", async (string message) => await RegisterContext(message, deviceId));
-                        //notifyHub.On("notify", (string message) => OnNotify(message));
+                    //notifyHub.On("connect", async (string message) => await RegisterContext(message, deviceId));
+                    //notifyHub.On("notify", (string message) => OnNotify(message));
 
 
 
@@ -74,20 +76,22 @@ namespace DmobileApp
                 }
                 else if(resIdentify.code == 402)
                 {
-                    MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
-
                     //MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+
+                    MainPage = new NavigationPage(new Register2(deviceId, simSerial, version, phone_number));
                 }
                 else 
                 {
-                    MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+                    //MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+                    MainPage = new NavigationPage(new Register2(deviceId, simSerial, version, phone_number));
                 }
                 //else
                 //MainPage = new NavigationPage(new Register(deviceId, simSerial, version));
             }
             else
             {
-                MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+                //MainPage = new NavigationPage(new Register(deviceId, simSerial, version, phone_number));
+                MainPage = new NavigationPage(new Register2(deviceId, simSerial, version, phone_number));
                 //MainPage.DisplayAlert("ไม่สามารถเข้าสู่ระบบได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง!", "ตกลง");
                 //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลองเข้าระบบใหม่ในภายหลัง");
             }

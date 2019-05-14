@@ -26,8 +26,15 @@
         <!--<Frame Grid.Row="0" OutlineColor="Transparent" HasShadow="False" Grid.Column="0" BackgroundColor="Teal" Padding="10,10" CornerRadius="15" Margin="0,0">
             <Label TextColor="White" Text="{Binding Text}" FontSize="20"/>
         </Frame>-->
-        <Frame Grid.Row="0" OutlineColor="Transparent" HasShadow="False" Grid.Column="0" BackgroundColor="White" Padding="10,10" CornerRadius="15" Margin="0,0">
+        <Frame Grid.Row="0" OutlineColor="Transparent" HasShadow="false" Grid.Column="0" BackgroundColor="White" Padding="10,10" CornerRadius="15" Margin="0,0" IsVisible="{Binding HasText}">
             <Label TextColor="Black" Text="{Binding Text}" FontSize="18"/>
+        </Frame>
+        <Frame Grid.Row="0" OutlineColor="Transparent" HasShadow="False" Grid.Column="0" BackgroundColor="White" Padding="10,10" CornerRadius="15" Margin="0,0" IsVisible="{Binding HasAttachement}">          
+            <Image Source="{Binding AttachementUrl}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Handle_Tapped" Command="{Binding ViewImgCommand}"/>
+                </Image.GestureRecognizers>    
+            </Image>
         </Frame>
         <Label FontSize="Micro" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10" Text="{Binding MessageDateTime, StringFormat='{0:dd/MM/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
     </Grid>

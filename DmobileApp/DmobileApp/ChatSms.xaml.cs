@@ -18,6 +18,7 @@ namespace DmobileApp
 	public partial class ChatSms : ContentPage
 	{
         private int _cust_no;
+        private string _cust_name;
         private double app_version, current_version;
         private List<string> notiMessage = new List<string>();
         private List<ColorItem> colors = new List<ColorItem>();
@@ -27,6 +28,7 @@ namespace DmobileApp
         public ChatSms(profile_data profile, string version)
 		{
 			InitializeComponent ();
+            _cust_name = profile.CUST_NAME;
             Title = profile.CUST_NAME;
             app_version = profile.APP_VERSION;
 
@@ -93,7 +95,7 @@ namespace DmobileApp
 
         protected override void OnAppearing()
         {
-            var messages = new MainPageViewModel(_cust_no);
+            var messages = new MainPageViewModel(_cust_no, Navigation, _cust_name);
             if (messages.Messages.Count > 0)
             {
                 BindingContext = messages;
@@ -119,7 +121,7 @@ namespace DmobileApp
         private void MyListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var message = MessagesListView.SelectedItem as MessageViewModel;
-            if (message != null)
+            if (message != null && message.HasAttachement == false)
             {
                 if (message.Text.Contains("อัพเดทเวอร์ชั่น"))
                 {

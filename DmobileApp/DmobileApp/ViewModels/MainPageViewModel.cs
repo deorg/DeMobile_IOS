@@ -7,12 +7,15 @@ using System.Windows.Input;
 using DmobileApp.Model;
 using Xamarin.Forms;
 using System.Linq;
+using System.Globalization;
 
 namespace DmobileApp.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
         private ObservableCollection<MessageViewModel> messagesList;
+        private INavigation _navigation;
+        private string _cust_name;
 
         public ObservableCollection<MessageViewModel> Messages
         {
@@ -54,12 +57,12 @@ namespace DmobileApp.ViewModels
                     {
                         foreach (var msg in items.data)
                         {
-                            Messages.Insert(0, new MessageViewModel
+                            Messages.Insert(0, new MessageViewModel(this._navigation, this._cust_name)
                             {
                                 Text = msg.sms_note,
                                 IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
-                                //MessageDateTime = DateTime.Now
-                                MessageDateTime = msg.sms_time
+                                MessageDateTime = msg.sms_time.ToString("dd/MM/yyyy HH:mm")
+                                //MessageDateTime = msg.sms_time
                             });
                         }
                     }
@@ -86,13 +89,15 @@ namespace DmobileApp.ViewModels
             }
         }
         public ICommand SendCommand { get; set; }
+        public ICommand ViewImgCommand { get; set; }
 
 
-        public MainPageViewModel(int cust_no)
+        public MainPageViewModel(int cust_no, INavigation navigation, string cust_name)
         {
             // Initialize with default values
             try
             {
+                this._navigation = navigation;
                 _cust_no = cust_no;
                 if (cust_no != 0)
                 {
@@ -106,14 +111,26 @@ namespace DmobileApp.ViewModels
                         {
                             foreach (var msg in items.Result.data)
                             {
-                                Messages.Add(new MessageViewModel
+                                Messages.Add(new MessageViewModel(navigation, cust_name)
                                 {
                                     Text = msg.sms_note,
                                     IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
-                                    //MessageDateTime = DateTime.Now
-                                    MessageDateTime = msg.sms_time
+                                    MessageDateTime = msg.sms_time.ToString("dd/MM/yyyy HH:mm")
+                                    //MessageDateTime = msg.sms_time
                                 });
                             }
+                            Messages.Add(new MessageViewModel(navigation, cust_name)
+                            {
+                                AttachementUrl = "http://35.197.153.92/Images/banks/bk.png",
+                                IsIncoming = true,
+                                MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+                            });
+                            Messages.Add(new MessageViewModel(navigation, cust_name)
+                            {
+                                AttachementUrl = "http://35.197.153.92/Images/banks/kb.png",
+                                IsIncoming = true,
+                                MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+                            });
                         }
                     }
                     else
@@ -138,9 +155,13 @@ namespace DmobileApp.ViewModels
                 {
                     if (!string.IsNullOrEmpty(OutGoingText))
                     {
-                        Messages.Add(new MessageViewModel { Text = OutGoingText, IsIncoming = false, MessageDateTime = DateTime.Now });
+                        Messages.Add(new MessageViewModel(navigation, cust_name) { Text = OutGoingText, IsIncoming = false, MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm") });
                         OutGoingText = null;                   
                     }
+                });
+                ViewImgCommand = new Command(() =>
+                {
+                    Debug.WriteLine("PIPE => view image command");
                 });
             }
             catch(Exception e)

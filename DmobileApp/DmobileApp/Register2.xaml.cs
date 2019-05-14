@@ -1,11 +1,10 @@
-﻿using DmobileApp.Model;
-using DmobileApp.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using DmobileApp.Model;
+using DmobileApp.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,18 +12,26 @@ using Xamarin.Forms.Xaml;
 namespace DmobileApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Register : ContentPage
+    public partial class Register2 : ContentPage
     {
         private string _deviceID, _simSerial, _version;
-        public Register(string deviceId = "", string simSerial = "", string version = "1", string phone_no = "")
+        public Register2(string deviceId = "", string simSerial = "", string version = "1", string phone_no = "")
         {
             InitializeComponent();
             _deviceID = deviceId;
             _simSerial = simSerial;
             _version = version;
-
+            Padding = new Thickness(0, 0, 0, 60);
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                BackgroundColor = Color.WhiteSmoke;
+                loginCard.BackgroundColor = Color.Transparent;
+                loginForm.BackgroundColor = Color.FromHex("#0A2239");
+                loginForm.BorderColor = Color.Transparent;
+            }
         }
-        private async void btnRegister_Clicked(object sender, EventArgs e)
+
+        async void Handle_ClickedAsync(object sender, System.EventArgs e)
         {
             if (string.IsNullOrEmpty(txtPhone.Text))
             {
@@ -39,12 +46,12 @@ namespace DmobileApp
             //data.pin = txtPin.Text;
             data.device_id = _deviceID;
             data.app_version = version;
-            if(Device.RuntimePlatform == Device.iOS)
+            if (Device.RuntimePlatform == Device.iOS)
             {
                 data.serial_sim = "1111111111";
                 data.platform = "IOS";
             }
-            else if(Device.RuntimePlatform == Device.Android)
+            else if (Device.RuntimePlatform == Device.Android)
             {
                 data.serial_sim = "2222222222";
                 data.platform = "ANDROID";
@@ -54,16 +61,16 @@ namespace DmobileApp
             data.api_version = DeviceInfo.VersionString;
 
             var result = User.preIdentify(data.phone_no);
-            if(result != null)
+            if (result != null)
             {
-                if(result.code == 200)
+                if (result.code == 200)
                 {
-                    if(result.data.Count > 1)
+                    if (result.data.Count > 1)
                     {
                         List<string> menu = new List<string>();
-                        foreach(var n in result.data)
+                        foreach (var n in result.data)
                         {
-                            menu.Add("คุณ"+n.CUST_NAME+"\n"+n.CITIZEN_NO);
+                            menu.Add("คุณ" + n.CUST_NAME + "\n" + n.CITIZEN_NO);
                         }
                         var action = await DisplayActionSheet("D-Mobile App ยินดีต้อนรับ\n(กรุณาตรวจการชำระเงินทุกวัน)\nกรูณากดเลือก", null, "ไม่พบชื่อของท่าน", menu.ToArray());
                         Debug.WriteLine($"pipe => The action is {action}");
@@ -99,78 +106,21 @@ namespace DmobileApp
                     await DisplayAlert("ไม่สามารถลงทะเบียนได้", result.message, "ตกลง");
                 }
             }
-            //var result = Services.User.register(data);
-            //if(result != null)
-            //{
-            //    if(result.code == 200)
-            //    {
-            //        if(Device.RuntimePlatform == Device.Android)
-            //            DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");
-                       
-
-            //        Navigation.PushAsync(new Mainpage(result.data, _deviceID, _simSerial, _version));
-            //        Navigation.RemovePage(this);
-
-            //        //if (result.data.PERMIT == "BOTH")
-            //        //{
-            //        //    Navigation.PushAsync(new Mainpage(result.data));
-            //        //    Navigation.RemovePage(this);
-            //        //}
-            //        //else if(result.data.PERMIT == "SMS")
-            //        //{
-            //        //    Navigation.PushAsync(new ChatSms(result.data));
-            //        //    Navigation.RemovePage(this);
-            //        //}
-            //        //else if(result.data.PERMIT == "PAYMENT")
-            //        //{
-            //        //    Navigation.PushAsync(new LoanPage(result.data));
-            //        //    Navigation.RemovePage(this);                       
-            //        //}
-            //    }
-            //    else
-            //    {
-            //        DisplayAlert("ไม่สามารถลงทะเบียนได้", result.message, "ตกลง");
-            //        //if(Device.RuntimePlatform == Device.Android)
-            //        //DependencyService.Get<IMessage>().longAlert(result.message);
-            //    }
-            //}
-            //else
-            //{
-            //    DisplayAlert("ไม่สามารถลงทะเบียนได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลงทะเบียนใหม่ในภายหลัง", "ตกลง");
-            //    txtPhone.Text = "";
-            //    //if(Device.RuntimePlatform == Device.Android)
-            //        //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
-            //}
         }
         private void register(m_register data)
         {
             var result = User.register(data);
-            if(result != null)
+            if (result != null)
             {
-                if(result.code == 200)
+                if (result.code == 200)
                 {
-                    if(Device.RuntimePlatform == Device.Android)
+                    if (Device.RuntimePlatform == Device.Android)
                         DependencyService.Get<IMessage>().longAlert("ลงทะเบียนสำเร็จ");
 
 
                     Navigation.PushAsync(new Mainpage(result.data, _deviceID, _simSerial, _version));
                     Navigation.RemovePage(this);
 
-                    //if (result.data.PERMIT == "BOTH")
-                    //{
-                    //    Navigation.PushAsync(new Mainpage(result.data));
-                    //    Navigation.RemovePage(this);
-                    //}
-                    //else if(result.data.PERMIT == "SMS")
-                    //{
-                    //    Navigation.PushAsync(new ChatSms(result.data));
-                    //    Navigation.RemovePage(this);
-                    //}
-                    //else if(result.data.PERMIT == "PAYMENT")
-                    //{
-                    //    Navigation.PushAsync(new LoanPage(result.data));
-                    //    Navigation.RemovePage(this);                       
-                    //}
                 }
                 else
                 {
@@ -184,7 +134,7 @@ namespace DmobileApp
                 DisplayAlert("ไม่สามารถลงทะเบียนได้", "พบข้อผิดพลาดจากเซิฟเวอร์ กรุณาลงทะเบียนใหม่ในภายหลัง", "ตกลง");
                 txtPhone.Text = "";
                 //if(Device.RuntimePlatform == Device.Android)
-                    //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
+                //DependencyService.Get<IMessage>().longAlert("พบข้อผิดพลาดจากเซิฟเวอร์ ไม่สามารถลงทะเบียนได้");
             }
         }
     }
