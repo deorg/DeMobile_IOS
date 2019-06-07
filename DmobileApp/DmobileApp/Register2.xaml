@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="DmobileApp.Register2" Title="ลงทะเบียน">
     <ContentPage.Content>
-        <StackLayout x:Name="loginCard" VerticalOptions="Center"  HorizontalOptions="Center">
+        <StackLayout x:Name="loginCard" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Margin="10,40">
             <Frame x:Name="loginForm" HasShadow="true" CornerRadius="10" BackgroundColor="White" OutlineColor="Teal" BorderColor="Teal">
                 <StackLayout>
                     <Image Source="logo.png" HeightRequest="100" WidthRequest="100"/> 

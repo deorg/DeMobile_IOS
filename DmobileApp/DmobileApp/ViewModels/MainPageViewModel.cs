@@ -8,6 +8,7 @@ using DmobileApp.Model;
 using Xamarin.Forms;
 using System.Linq;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace DmobileApp.ViewModels
 {
@@ -41,18 +42,15 @@ namespace DmobileApp.ViewModels
                 RaisePropertyChanged("IsRefreshing");
             }
         }
-        private async System.Threading.Tasks.Task refreshAsync()
+        private async Task refreshAsync()
         {
             if (_cust_no != 0)
             {
-                //Messages = new ObservableCollection<MessageViewModel>();
+
                 var items = await Services.User.getSmsOffsetAsync(_cust_no, _skip += 10, _take);
-                //if (items.data.Count > 0)
-                //items.data = items.data.OrderBy(p => p.sms010_pk).ToList();
                 if (items.code == 200)
                 {
-                    //if (Device.RuntimePlatform == Device.Android)
-                    //DependencyService.Get<IMessage>().longAlert("ดึงข้อมูลสำเร็จ");
+
                     if (items.data.Count != 0)
                     {
                         foreach (var msg in items.data)
@@ -61,7 +59,8 @@ namespace DmobileApp.ViewModels
                             {
                                 Text = msg.sms_note,
                                 IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
-                                MessageDateTime = msg.sms_time.ToString("dd/MM/yyyy HH:mm")
+                                MessageDateTime = msg.sms_time.ToString("dd/MM/yyyy HH:mm"),
+                                AttachementUrl = msg.msg_type == "IMAGE" ? msg.sms_note : null
                                 //MessageDateTime = msg.sms_time
                             });
                         }
@@ -97,12 +96,12 @@ namespace DmobileApp.ViewModels
             // Initialize with default values
             try
             {
-                this._navigation = navigation;
                 _cust_no = cust_no;
                 if (cust_no != 0)
                 {
-                    Messages = new ObservableCollection<MessageViewModel>();                   
+                    Messages = new ObservableCollection<MessageViewModel>();
                     var items = Services.User.getSmsOffsetAsync(cust_no, _skip, _take);
+                    //var items = Services.User.getSmsOffset2(this._smsreq);
                     if (items.Result.code == 200)
                     {
                         //if (Device.RuntimePlatform == Device.Android)
@@ -115,22 +114,23 @@ namespace DmobileApp.ViewModels
                                 {
                                     Text = msg.sms_note,
                                     IsIncoming = msg.sender_type == "SYSTEM" ? true : false,
-                                    MessageDateTime = msg.sms_time.ToString("dd/MM/yyyy HH:mm")
+                                    MessageDateTime = msg.sms_time.ToString("dd/MM/yyyy HH:mm"),
+                                    AttachementUrl = msg.msg_type == "IMAGE" ? msg.sms_note : null
                                     //MessageDateTime = msg.sms_time
                                 });
                             }
-                            Messages.Add(new MessageViewModel(navigation, cust_name)
-                            {
-                                AttachementUrl = "http://35.197.153.92/Images/banks/bk.png",
-                                IsIncoming = true,
-                                MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
-                            });
-                            Messages.Add(new MessageViewModel(navigation, cust_name)
-                            {
-                                AttachementUrl = "http://35.197.153.92/Images/banks/kb.png",
-                                IsIncoming = true,
-                                MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
-                            });
+                            //Messages.Add(new MessageViewModel(navigation, cust_name)
+                            //{
+                            //    AttachementUrl = "http://35.197.153.92/Images/banks/bk.png",
+                            //    IsIncoming = true,
+                            //    MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+                            //});
+                            //Messages.Add(new MessageViewModel(navigation, cust_name)
+                            //{
+                            //    AttachementUrl = "http://35.197.153.92/Images/banks/kb.png",
+                            //    IsIncoming = true,
+                            //    MessageDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+                            //});
                         }
                     }
                     else

@@ -5,6 +5,7 @@ using DmobileApp.Services;
 using Microsoft.AspNet.SignalR.Client;
 using Plugin.Badge;
 using Plugin.LocalNotifications;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,6 +20,9 @@ namespace DmobileApp
         private string _simSerial = "";
         private string _version = "1";
         private string _phone_number = "";
+        private string _brand;
+        private string _model;
+        private string _api_version;
         private HubConnection connection;
         private IHubProxy notifyHub;
         private string p_connection;
@@ -30,8 +34,12 @@ namespace DmobileApp
             _simSerial = simSerial;
             _version = version;
             _phone_number = phone_number;
+            _brand = DeviceInfo.Manufacturer;
+            _model = DeviceInfo.Model;
+            _api_version = DeviceInfo.VersionString;
             //MainPage = new Register2();
-            resIdentify = User.identify(deviceId, simSerial, version);
+            //resIdentify = User.identify(deviceId, simSerial, version);
+            resIdentify = User.identify2(deviceId, simSerial, _brand, _model, version, _api_version);
             if (resIdentify != null)
             {
                 if (resIdentify.code == 200)

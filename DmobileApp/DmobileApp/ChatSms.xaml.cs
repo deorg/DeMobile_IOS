@@ -183,6 +183,7 @@ namespace DmobileApp
         private void MyListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             MessagesListView.SelectedItem = null;
+            //adsBox.IsVisible = false;
             //txtMessage.Unfocus();
         }
         private void Send_Clicked(object sender, EventArgs e)

@@ -52,7 +52,7 @@ namespace DmobileApp.ViewModels
         }
 
         public bool HasAttachement => !string.IsNullOrEmpty(attachementUrl);
-        public bool HasText => !string.IsNullOrEmpty(text);
+        public bool HasText => !string.IsNullOrEmpty(text) && !HasAttachement;
 
         private string attachementUrl;
 

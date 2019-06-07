@@ -15,6 +15,11 @@
     </ContentPage.Resources>
     <StackLayout>
         <!--<ScrollView x:Name="scrollList">-->
+        <!--<StackLayout x:Name="adsBox" Padding="0, 0, 0, 0">
+            <Frame Padding="5,5,5,5">
+                <Label  TextColor="Teal" Text="กรุณาตรวจยอดด้วย" FontSize="17" HorizontalTextAlignment="Center"></Label>
+                </Frame>
+        </StackLayout>-->
         <ListView x:Name="MessagesListView"
             ItemTemplate="{StaticResource MessageTemplateSelector}" 
             ItemsSource="{Binding Messages}"
@@ -33,11 +38,9 @@
         <!--</ScrollView>-->
         
         <StackLayout x:Name="notiBox" Padding="10, 0, 10, 5" IsVisible="false">
-<!--            <ScrollView x:Name="notiScroll" Orientation="Horizontal">-->
             <Frame x:Name="notiFrame" CornerRadius="10" Padding="5,5,5,5">
                 <Label x:Name="notiTxt" TextColor="Teal" FontSize="17" HorizontalTextAlignment="Center"></Label>
                 </Frame>
-<!--            </ScrollView>-->
         </StackLayout>
         
         <StackLayout x:Name="chatBox" IsVisible="false">

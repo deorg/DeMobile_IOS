@@ -43,5 +43,7 @@ namespace DmobileApp.Model
         public int? sms010__ref { get; set; }
         [JsonProperty("READ_STATUS")]
         public string read_status { get; set; }
+        [JsonProperty("MSG_TYPE")]
+        public string msg_type { get; set; }
     }
 }

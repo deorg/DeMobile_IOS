@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DmobileApp.Services
 {
@@ -108,6 +109,38 @@ namespace DmobileApp.Services
                 return null;
             }
         }
+        public static m_profile identify2(string deviceId, string serialSim, string brand, string model,  string version, string api_version)
+        {
+            //var ver = double.Parse(version);
+            string IdentifyUrl = $"{Constant.WebService.Production.Api.User.identify2}serial_sim={serialSim}&deviceId={deviceId}&brand={brand}&model={model}&app_version={version}&api_version={api_version}";
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = client.GetAsync(IdentifyUrl).Result;
+                    var content = response.Content.ReadAsStringAsync().Result;
+                    var profile = JsonConvert.DeserializeObject<m_profile>(content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        client.Dispose();
+                        return profile;
+                    }
+                    else
+                    {
+                        client.Dispose();
+                        return null;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+        }
         public static m_contract getContract(int cust_no)
         {
             string LoanUrl = Constant.WebService.Production.Api.User.getContract + cust_no.ToString();
@@ -154,7 +187,7 @@ namespace DmobileApp.Services
                 }
             }
         }
-        public static async System.Threading.Tasks.Task<m_sms> getSmsOffsetAsync(int cust_no, int skip = 0, int take = 0)
+        public static async Task<m_sms> getSmsOffsetAsync(int cust_no, int skip = 0, int take = 0)
         {
             string SmsUrl = $"{Constant.WebService.Production.Api.User.getSmsOffset}id={cust_no}&skip={skip}&take={take}";
             using (var client = new HttpClient())
@@ -174,6 +207,33 @@ namespace DmobileApp.Services
                 {
                     client.Dispose();
                     return null;
+                }
+            }
+        }
+        public static m_sms getSmsOffset2(m_smsOffset value)
+        {
+            string registerUrl = Constant.WebService.Production.Api.User.getSmsOffset2;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(Host);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string postBody = JsonConvert.SerializeObject(value);
+                    var content = new StringContent(postBody, Encoding.UTF8, "application/json");
+                    var response = client.PostAsync(registerUrl, content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseObj = JsonConvert.DeserializeObject<m_sms>(response.Content.ReadAsStringAsync().Result);
+                        return responseObj;
+                    }
+                    return null;
+                }
+                finally
+                {
+                    client.Dispose();
                 }
             }
         }
